@@ -1,0 +1,546 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - SkillMatch AI</title>
+<link rel="stylesheet" href="../home/home.component.css">
+<link rel="stylesheet" href="admin.component.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="admin-container">
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+      <div class="admin-logo">
+        <img src="/placeholder.svg?height=32&width=32" alt="SkillMatch AI Logo">
+        <span>SkillMatch Admin</span>
+      </div>
+      <button class="admin-sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+    <div class="admin-sidebar-content">
+      <nav class="admin-sidebar-menu">
+        <ul>
+          <li class="active">
+            <a href="admin-dashboard.html">
+              <i class="fas fa-chart-line"></i>
+              <span class="menu-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-users.html">
+              <i class="fas fa-users"></i>
+              <span class="menu-text">User Management</span>
+              <span class="badge">24</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-security.html">
+              <i class="fas fa-shield-alt"></i>
+              <span class="menu-text">Platform Security</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-ai-monitoring.html">
+              <i class="fas fa-brain"></i>
+              <span class="menu-text">AI Accuracy</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-performance.html">
+              <i class="fas fa-tachometer-alt"></i>
+              <span class="menu-text">System Performance</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-jobs.html">
+              <i class="fas fa-briefcase"></i>
+              <span class="menu-text">Job Monitoring</span>
+              <span class="badge">12</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-settings.html">
+              <i class="fas fa-cog"></i>
+              <span class="menu-text">Platform Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user">
+        <div class="admin-user-avatar">
+          <img src="/placeholder.svg?height=40&width=40" alt="Admin Avatar">
+        </div>
+        <div class="admin-user-info">
+          <h4>Admin User</h4>
+          <p>Super Admin</p>
+        </div>
+      </div>
+      <a href="index.html" class="admin-logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Admin Main Content -->
+  <main class="admin-main">
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <button class="admin-mobile-toggle" id="mobileToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>Admin Dashboard</h1>
+      </div>
+      <div class="admin-header-right">
+        <div class="admin-search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search...">
+        </div>
+        <div class="admin-notifications">
+          <button class="admin-notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="admin-notification-badge">5</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+      <!-- Page Title -->
+      <div class="admin-page-title">
+        <h2>Dashboard Overview</h2>
+        <p>Welcome to the SkillMatch AI admin dashboard. Monitor platform performance, manage users, ensure security, and improve AI accuracy.</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon primary">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="admin-stat-info">
+            <div class="admin-stat-value">25,487</div>
+            <div class="admin-stat-label">Total Users</div>
+            <div class="admin-stat-change positive">
+              <i class="fas fa-arrow-up"></i> 12% from last month
+            </div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon success">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="admin-stat-info">
+            <div class="admin-stat-value">3,254</div>
+            <div class="admin-stat-label">Active Job Postings</div>
+            <div class="admin-stat-change positive">
+              <i class="fas fa-arrow-up"></i> 8% from last month
+            </div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon warning">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <div class="admin-stat-info">
+            <div class="admin-stat-value">1,876</div>
+            <div class="admin-stat-label">Successful Matches</div>
+            <div class="admin-stat-change positive">
+              <i class="fas fa-arrow-up"></i> 15% from last month
+            </div>
+          </div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon danger">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="admin-stat-info">
+            <div class="admin-stat-value">842</div>
+            <div class="admin-stat-label">Registered Companies</div>
+            <div class="admin-stat-change positive">
+              <i class="fas fa-arrow-up"></i> 5% from last month
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Cards -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title">User Registration Trends</div>
+          <div class="admin-card-actions">
+            <button class="admin-btn admin-btn-outline admin-btn-sm">
+              <i class="fas fa-download"></i> Export
+            </button>
+            <select class="admin-form-select" style="width: auto; padding: 6px 30px 6px 12px;">
+              <option>Last 7 days</option>
+              <option>Last 30 days</option>
+              <option>Last 90 days</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-card-content">
+          <div class="admin-chart-container">
+            <canvas id="userRegistrationChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title">Recent User Registrations</div>
+          <div class="admin-card-actions">
+            <button class="admin-btn admin-btn-primary admin-btn-sm">
+              <i class="fas fa-plus"></i> Add User
+            </button>
+          </div>
+        </div>
+        <div class="admin-card-content">
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Registered</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>john.doe&#64;example.com</td>
+                  <td>
+                    <span class="admin-badge admin-badge-info">Job Seeker</span>
+                  </td>
+                  <td>Apr 2, 2025</td>
+                  <td>
+                    <span class="admin-badge admin-badge-success">Active</span>
+                  </td>
+                  <td>
+                    <div class="admin-table-actions">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>jane.smith&#64;example.com</td>
+                  <td>
+                    <span class="admin-badge admin-badge-success">Employer</span>
+                  </td>
+                  <td>Apr 1, 2025</td>
+                  <td>
+                    <span class="admin-badge admin-badge-success">Active</span>
+                  </td>
+                  <td>
+                    <div class="admin-table-actions">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Michael Johnson</td>
+                  <td>michael.j&#64;example.com</td>
+                  <td>
+                    <span class="admin-badge admin-badge-info">Job Seeker</span>
+                  </td>
+                  <td>Mar 30, 2025</td>
+                  <td>
+                    <span class="admin-badge admin-badge-warning">Pending</span>
+                  </td>
+                  <td>
+                    <div class="admin-table-actions">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Emily Davis</td>
+                  <td>emily.d&#64;example.com</td>
+                  <td>
+                    <span class="admin-badge admin-badge-primary">Admin</span>
+                  </td>
+                  <td>Mar 28, 2025</td>
+                  <td>
+                    <span class="admin-badge admin-badge-success">Active</span>
+                  </td>
+                  <td>
+                    <div class="admin-table-actions">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Robert Wilson</td>
+                  <td>robert.w&#64;example.com</td>
+                  <td>
+                    <span class="admin-badge admin-badge-success">Employer</span>
+                  </td>
+                  <td>Mar 25, 2025</td>
+                  <td>
+                    <span class="admin-badge admin-badge-danger">Inactive</span>
+                  </td>
+                  <td>
+                    <div class="admin-table-actions">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="admin-btn admin-btn-outline admin-btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="admin-pagination">
+            <div class="admin-pagination-info">
+              Showing 1 to 5 of 24 entries
+            </div>
+            <div class="admin-pagination-buttons">
+              <button class="admin-pagination-button disabled">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="admin-pagination-button active">1</button>
+              <button class="admin-pagination-button">2</button>
+              <button class="admin-pagination-button">3</button>
+              <button class="admin-pagination-button">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title">Recent Job Postings</div>
+          <div class="admin-card-actions">
+            <button class="admin-btn admin-btn-outline admin-btn-sm">
+              <i class="fas fa-eye"></i> View All
+            </button>
+          </div>
+        </div>
+        <div class="admin-card-content">
+          <div class="admin-job-card">
+            <div class="admin-job-card-header">
+              <div>
+                <div class="admin-job-card-title">Senior Frontend Developer</div>
+                <div class="admin-job-card-company">
+                  <div class="admin-job-card-company-logo">
+                    <img src="/placeholder.svg?height=40&width=40" alt="TechCorp Logo">
+                  </div>
+                  <div class="admin-job-card-company-name">TechCorp</div>
+                </div>
+              </div>
+              <div class="admin-job-card-status active">Active</div>
+            </div>
+            <div class="admin-job-card-details">
+              <div class="admin-job-card-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>San Francisco, CA (Remote)</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-dollar-sign"></i>
+                <span>$120K - $150K</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-clock"></i>
+                <span>Posted 2 days ago</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-users"></i>
+                <span>18 Applicants</span>
+              </div>
+            </div>
+            <div class="admin-job-card-skills">
+              <div class="admin-job-card-skill">React</div>
+              <div class="admin-job-card-skill">JavaScript</div>
+              <div class="admin-job-card-skill">TypeScript</div>
+              <div class="admin-job-card-skill">HTML</div>
+              <div class="admin-job-card-skill">CSS</div>
+            </div>
+            <div class="admin-job-card-actions">
+              <button class="admin-btn admin-btn-outline admin-btn-sm">
+                <i class="fas fa-eye"></i> View
+              </button>
+              <button class="admin-btn admin-btn-outline admin-btn-sm">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="admin-btn admin-btn-outline-primary admin-btn-sm">
+                <i class="fas fa-check"></i> Approve
+              </button>
+            </div>
+          </div>
+          
+          <div class="admin-job-card">
+            <div class="admin-job-card-header">
+              <div>
+                <div class="admin-job-card-title">Full Stack Engineer</div>
+                <div class="admin-job-card-company">
+                  <div class="admin-job-card-company-logo">
+                    <img src="/placeholder.svg?height=40&width=40" alt="InnovateTech Logo">
+                  </div>
+                  <div class="admin-job-card-company-name">InnovateTech</div>
+                </div>
+              </div>
+              <div class="admin-job-card-status pending">Pending Review</div>
+            </div>
+            <div class="admin-job-card-details">
+              <div class="admin-job-card-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>New York, NY (Hybrid)</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-dollar-sign"></i>
+                <span>$110K - $140K</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-clock"></i>
+                <span>Posted 1 week ago</span>
+              </div>
+              <div class="admin-job-card-detail">
+                <i class="fas fa-users"></i>
+                <span>12 Applicants</span>
+              </div>
+            </div>
+            <div class="admin-job-card-skills">
+              <div class="admin-job-card-skill">Node.js</div>
+              <div class="admin-job-card-skill">React</div>
+              <div class="admin-job-card-skill">MongoDB</div>
+              <div class="admin-job-card-skill">Express</div>
+            </div>
+            <div class="admin-job-card-actions">
+              <button class="admin-btn admin-btn-outline admin-btn-sm">
+                <i class="fas fa-eye"></i> View
+              </button>
+              <button class="admin-btn admin-btn-outline admin-btn-sm">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="admin-btn admin-btn-outline-primary admin-btn-sm">
+                <i class="fas fa-check"></i> Approve
+              </button>
+            </div>
+          </div>
+          
+          <div class="admin-pagination">
+            <div class="admin-pagination-info">
+              Showing 1 to 2 of 12 entries
+            </div>
+            <div class="admin-pagination-buttons">
+              <button class="admin-pagination-button disabled">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="admin-pagination-button active">1</button>
+              <button class="admin-pagination-button">2</button>
+              <button class="admin-pagination-button">3</button>
+              <button class="admin-pagination-button">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Sidebar Toggle
+  document.getElementById('sidebarToggle').addEventListener('click', function() {
+    document.getElementById('adminSidebar').classList.toggle('collapsed');
+  });
+  
+  // Mobile Menu Toggle
+  document.getElementById('mobileToggle').addEventListener('click', function() {
+    document.getElementById('adminSidebar').classList.add('active');
+  });
+  
+  // User Registration Chart
+  const ctx = document.getElementById('userRegistrationChart').getContext('2d');
+  const userRegistrationChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [
+        {
+          label: 'Job Seekers',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: '#6c5ce7',
+          tension: 0.1
+        },
+        {
+          label: 'Employers',
+          data: [28, 48, 40, 19, 86, 27, 90],
+          fill: false,
+          borderColor: '#00b894',
+          tension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
+
+
+
