@@ -1,0 +1,103 @@
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>SmartAI</h2>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">AI-assistant</a></li>
+                <li><a href="#">Job Matches</a></li>
+                <li><a href="#">Interviews</a></li>
+                <li><a href="#">Career Path</a></li>
+            </ul>
+            <a href="#" class="logout">Log Out</a>
+        </aside>
+        <main class="main-content">
+            <section class="welcome-section">
+                <div class="welcome-text">
+                    <h1>Welcome Loyce</h1>
+                </div>
+                <div class="profile-info">
+                    <div class="notification">🔔</div>
+                    <img src="placeholder_profile.png" alt="Profile Picture">
+                </div>
+            </section>
+
+            <section class="stats-grid">
+                <div class="stats-card">
+                    <h3>Upcoming Interviews</h3>
+                    <div class="value">1</div>
+                </div>
+                <div class="stats-card">
+                    <h3>Applied Jobs</h3>
+                    <div class="value">85%</div>
+                    <p style="font-size: 0.8em; color: #777;">Profile strength</p>
+                </div>
+                <div class="stats-card">
+                    <h3>Messages</h3>
+                    <div class="value">3</div>
+                </div>
+            </section>
+
+            <section class="matches-interviews-grid">
+                <div class="matches-card">
+                    <h2>Top Job Matches</h2>
+                    <div class="job-item">
+                        <h3 class="job-title">Senior Frontend Engineer</h3>
+                        <p class="company">TechCorp</p>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    <div class="job-item">
+                        <h3 class="job-title">Fullstack Developer</h3>
+                        <p class="company">Innovate Solutions</p>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    <div class="job-item">
+                        <h3 class="job-title">AI Assistant</h3>
+                        <p class="company">DataWise Inc.</p>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                </div>
+
+                <div class="interviews-card">
+                    <h2>Upcoming Interviews</h2>
+                    <div class="interview-item">
+                        <div class="interview-details">
+                            <h3 class="interview-company">TechCorp - Senior Frontend Developer</h3>
+                            <p class="interview-time">Tomorrow, 10:00 AM - 11:00 AM</p>
+                        </div>
+                        <button class="join-button">Join</button>
+                    </div>
+                    <div class="interview-item">
+                        <div class="interview-details">
+                            <h3 class="interview-company">TechCorp - Senior Frontend Developer</h3>
+                            <p class="interview-time">Apr 15, 11:00 AM - 12:00 PM</p>
+                        </div>
+                        <button class="join-button">Join</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ai-assistant-card">
+                <h2>AI Assistant</h2>
+                <p>Conversation History</p>
+                <button>+ New Chat</button>
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 0.8em; color: #777; margin-bottom: 5px;">Updates on:</p>
+                    <ul style="padding-left: 15px; font-size: 0.8em; color: #555;">
+                        <li>Job Matchings</li>
+                        <li>Interview Scheduling</li>
+                        <li>Career Path Tips</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label for="ai-query" style="font-size: 0.9em; color: #555;">Type your message...</label>
+                    <textarea id="ai-query" rows="3" style="width: 100%; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; padding: 8px; font-size: 0.9em;"></textarea>
+                    <div class="ai-assistant-actions" style="margin-top: 10px;">
+                        <button>Send</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
