@@ -9,4 +9,10 @@ export const routes: Routes = [
         },
     },
     { path: 'admin', component: AdminComponent },
+    {
+        path: 'login',
+        loadComponent() {
+            return import('./login/login.component').then(({ LoginComponent }) => LoginComponent);
+        },
+    },
 ];
