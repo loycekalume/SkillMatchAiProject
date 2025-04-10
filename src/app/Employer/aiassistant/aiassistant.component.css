@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:  sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f6f8; /* Light grey background */
@@ -13,74 +13,6 @@ body {
 }
 
 /* Improved Sidebar Styling */
-.sidebar {
-    background-color: #4a148c; /* Darker, richer purple */
-    color: #fff;
-    width: 240px; /* Slightly wider sidebar */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.sidebar-header {
-    height: 60px;
-    margin-bottom: 30px;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-}
-
-/* You might add a logo here */
-.sidebar-header::before {
-    content: 'SkillMatch AI';
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.sidebar-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.sidebar-nav li {
-    padding: 12px 20px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar-nav li.active {
-    background-color: rgba(255, 255, 255, 0.1); /* Lighter background for active */
-    font-weight: bold;
-}
-
-.sidebar-nav li:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-nav li a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    width: 100%;
-}
-
-.sidebar-footer {
-    margin-top: auto;
-    padding: 20px;
-    text-align: left;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-footer a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
 
 /* Improved Main Content Styling */
 .main-content {

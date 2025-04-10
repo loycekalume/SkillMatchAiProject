@@ -1,17 +1,5 @@
 import { Routes } from '@angular/router';
-import { AiAnalysisComponent } from './Admin/ai-analysis/ai-analysis.component';
-import { JobManagementComponent } from './Admin/job-management/job-management.component';
-import { UserManagementComponent } from './Admin/user-management/user-management.component';
-import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
-import { JobseekerComponent } from './jobseeker/jobseeker.component';
-import { JobseekerProfileComponent } from './jobseeker-profile/jobseeker-profile.component';
-import { MyInterviewsComponent } from './my-interviews/my-interviews.component';
-import { CareerpathComponent } from './careerpath/careerpath.component';
-import { AiassistantComponent } from './aiassistant/aiassistant.component';
-import { EmployerComponent } from './employer/employer.component';
-import { JobsPostedComponent } from './jobs-posted/jobs-posted.component';
-import { EmployerInterviewsComponent } from './employer-interviews/employer-interviews.component';
-import { ApplicationsComponent } from './applications/applications.component';
+
 
 export const routes: Routes = [
     {
@@ -49,5 +37,9 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: () => import('./Admin/admin.routes').then(m => m.ADMIN_ROUTES)
-        } 
+        }, 
+        {
+            path: 'employer',
+            loadChildren: () => import('./Employer/employer.routes').then(m => m.EMPLOYER_ROUTES)
+            } 
 ];
