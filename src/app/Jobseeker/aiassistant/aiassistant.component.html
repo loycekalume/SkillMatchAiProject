@@ -1,0 +1,74 @@
+
+
+    <div class="container">
+        <app-sidebar></app-sidebar>
+        <main class="main-content">
+            <header class="main-header">
+                <h1>AI Assistant</h1>
+                <div class="user-info">
+                    <div class="notifications">
+                        <span class="notification-badge">3</span>
+                        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.77-4-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68c-2.37.55-4 3.25-4 6.32v5l-2 2h16l-2-2z"/></svg>
+                    </div>
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Frontend Developer</span>
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+                </div>
+            </header>
+            <div class="chat-container">
+                <aside class="conversation-history">
+                    <h2>Conversation History</h2>
+                    <button class="new-chat-button">+ New Chat</button>
+                    <div class="history-item active">
+                        <div class="item-title">Job Search Help</div>
+                        <div class="item-date">Today, 10:30 AM</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="item-title">Resume Review</div>
+                        <div class="item-date">Yesterday, 2:15 PM</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="item-title">Interview Preparation</div>
+                        <div class="item-date">Mar 30, 2025</div>
+                    </div>
+                </aside>
+                <div class="chat-area">
+                    <div class="message bot-message">
+                        <div class="avatar">🤖</div>
+                        <div class="message-content">
+                            <p>Hello! I'm your SkillMatch AI assistant. How can I help with your job search today?</p>
+                            <span class="message-time">10:30 AM</span>
+                        </div>
+                    </div>
+                    <div class="message user-message">
+                        <div class="avatar">👤</div>
+                        <div class="message-content">
+                            <p>Hi! I'm looking for frontend developer positions that match my skills.</p>
+                            <span class="message-time">10:32 AM</span>
+                        </div>
+                    </div>
+                    <div class="message bot-message">
+                        <div class="avatar">🤖</div>
+                        <div class="message-content">
+                            <p>Great! Based on your profile, I've found 5 new job postings that match your skills. The top match is a Senior Frontend Developer position at TechCorp with a 95% match to your skills. Would you like me to show you the details?</p>
+                            <span class="message-time">10:33 AM</span>
+                        </div>
+                    </div>
+                    <div class="input-area">
+                        <div class="input-box">
+                            <input type="text" placeholder="Type your message...">
+                            <button class="attach-button">📎</button>
+                        </div>
+                        <button class="send-button">
+                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 21L23 12L2 3V10L17 12L2 14V21Z"/></svg>
+                        </button>
+                    </div>
+                    <div class="suggestion-buttons">
+                        <button class="suggestion-button">Yes, help me apply</button>
+                        <button class="suggestion-button">Show me more jobs</button>
+                        <button class="suggestion-button">What skills should I improve?</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>

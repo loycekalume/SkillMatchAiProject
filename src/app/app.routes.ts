@@ -41,5 +41,9 @@ export const routes: Routes = [
         {
             path: 'employer',
             loadChildren: () => import('./Employer/employer.routes').then(m => m.EMPLOYER_ROUTES)
-            } 
+            } ,
+            {
+                path: 'jobseeker',
+                loadChildren: () => import('./Jobseeker/jobseeker.routes').then(m => m.JOBSEEKER_ROUTES)
+                } 
 ];

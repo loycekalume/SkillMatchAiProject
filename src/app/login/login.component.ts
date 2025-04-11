@@ -8,7 +8,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../home/home.component.css'],
+  styleUrls: ['./login.component.css','../home/home.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -51,11 +51,10 @@ export class LoginComponent implements OnInit {
     console.log('Authenticating user...');
     
     setTimeout(() => {
-      // For demonstration purposes, determine user role based on email
-      // In a real app, this would come from your authentication service/API
+     
       let userRole = this.determineUserRole(email);
       
-      // Store user info in localStorage (or use a proper auth service)
+     
       localStorage.setItem('userEmail', email);
       localStorage.setItem('userRole', userRole);
       localStorage.setItem('isLoggedIn', 'true');
@@ -68,8 +67,7 @@ export class LoginComponent implements OnInit {
   }
   
   private determineUserRole(email: string): string {
-    // This is a simplified example - in a real application, 
-    // the role would come from your authentication service or JWT token
+ 
     if (email.includes('admin')) {
       return 'admin';
     } else if (email.includes('employer')) {
