@@ -1,18 +1,21 @@
-    <aside class="sidebar">
-        <div class="sidebar-header">
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li *ngFor="let item of menuItems" [class.active]="item.active">
-                    <a [routerLink]="item.link" routerLinkActive="active">
-                        <i [class]="item.icon"></i>
-                        <span>{{ item.text }}</span>
-                       
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="sidebar-footer">
-            <a href="#">Log Out</a>
-        </div>
-    </aside>
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Employer</h2>
+    </div>
+    <nav class="sidebar-nav">
+        <ul class="nav-list">
+            <li *ngFor="let item of menuItems" class="nav-item" [class.active]="item.active">
+                <a [routerLink]="item.link" routerLinkActive="active" class="nav-link">
+                    <i [class]="item.icon"></i>
+                    <span>{{ item.text }}</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="#" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+        </a>
+    </div>
+</aside>

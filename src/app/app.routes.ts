@@ -19,13 +19,30 @@ export const routes: Routes = [
             return import('./sign-up/sign-up.component').then(({ SignUpComponent }) => SignUpComponent);
         },
     },
-    {
-        path: 'jobmatches',
-        loadComponent() {
-            return import('./Jobseeker/jobmatches/jobmatches.component').then(({ JobmatchesComponent }) => JobmatchesComponent);
-        },
-    },
-    
+    // {
+    //     path: 'employer-dashboard',
+    //     loadComponent() {
+    //         return import('./Employer/employer-dashboard/employer-dashboard.component').then(({ EmployerDashboardComponent }) => EmployerDashboardComponent);
+    //     },
+    // },
+    // {
+    //     path: 'jobsposted',
+    //     loadComponent() {
+    //         return import('./Employer/jobs-posted/jobs-posted.component').then(({ JobsPostedComponent }) => JobsPostedComponent);
+    //     },
+    // },
+    // {
+    //     path: 'interviews',
+    //     loadComponent() {
+    //         return import('./Employer/employer-interviews/employer-interviews.component').then(({  EmployerInterviewsComponent }) =>  EmployerInterviewsComponent);
+    //     },
+    // },
+    // {
+    //     path: 'applications',
+    //     loadComponent() {
+    //         return import('./Employer/applications/applications.component').then(({  ApplicationsComponent }) =>  ApplicationsComponent);
+    //     },
+    // },
     {
         path: 'employer',
         loadChildren: () => import('./Employer/employer.routes').then(m => m.EMPLOYER_ROUTES)

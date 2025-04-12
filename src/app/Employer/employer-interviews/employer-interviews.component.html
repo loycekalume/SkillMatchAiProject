@@ -1,54 +1,63 @@
-<body>
-    <div class="dashboard-container">
-        <app-sidebar></app-sidebar>
-        <main class="main-content">
-            <div class="interviews-header">
-                <div class="interviews-title">
-                    <h1>Interviews</h1>
-                    <p>Manage, review and schedule interviews</p>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search">
-                    <button>Search</button>
-                </div>
-            </div>
-
-            <div class="interviews-table-container">
-                <table class="interviews-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Date and time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Loyce Kalume</td>
-                            <td>Software Dev</td>
-                            <td>Video</td>
-                            <td class="status-scheduled">scheduled</td>
-                            <td>25, Apr 10:00 AM</td>
-                        </tr>
-                        <tr>
-                            <td>Grace Kalume</td>
-                            <td>Graphic Designer</td>
-                            <td>Physical</td>
-                            <td class="status-done">done</td>
-                            <td>25, Mar 4:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Anthony Tial</td>
-                            <td>Quality Assuarance</td>
-                            <td>Video</td>
-                            <td class="status-new">new</td>
-                            <td>25, Apr 10:00 AM</td>
-                        </tr>
-                        </tbody>
-                </table>
-            </div>
-        </main>
+<div class="container">
+    <app-sidebar></app-sidebar>
+  
+    <div class="main-content">
+      <div class="header">
+        <h2>Interviews</h2>
+        <button class="search-btn">Search</button>
+      </div>
+  
+      <p class="description">Manage, review and schedule interviews</p>
+  
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Date and Time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Loyce Kalume</td>
+              <td>Software Dev</td>
+              <td>Video</td>
+              <td class="status scheduled">scheduled</td>
+              <td>25, Apr 10:00AM</td>
+              <td>
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Grace Kalume</td>
+              <td>Graphic Designer</td>
+              <td>Physical</td>
+              <td class="status done">done</td>
+              <td>25, Mar 4:00PM</td>
+              <td>
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Anthony Tial</td>
+              <td>Quality Assurance</td>
+              <td>Video</td>
+              <td class="status new">new</td>
+              <td>25, Apr 10:00AM</td>
+              <td>
+                <button class="edit">Edit</button>
+                <button class="delete">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
+  </div>
+  

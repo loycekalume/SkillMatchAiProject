@@ -1,50 +1,59 @@
-<body>
-    <div class="dashboard-container">
-       <app-sidebar></app-sidebar>
-        <main class="main-content">
-            <div class="jobs-header">
-                <div class="jobs-title">
-                    <h1>Jobs Posted</h1>
-                    <p>Manage and review jobs</p>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search">
-                    <button>Search</button>
-                </div>
-            </div>
-
-            <div class="jobs-table-container">
-                <table class="jobs-table">
-                    <thead>
-                        <tr>
-                            <th>Job Title</th>
-                            <th>Location</th>
-                            <th>Salary</th>
-                            <th>Date Posted</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Software Dev</td>
-                            <td>On-site</td>
-                            <td>50,000</td>
-                            <td>25, Apr</td>
-                        </tr>
-                        <tr>
-                            <td>Graphic Designer</td>
-                            <td>Hybrid</td>
-                            <td>50,000</td>
-                            <td>25, Mar</td>
-                        </tr>
-                        <tr>
-                            <td>Quality Assuarance</td>
-                            <td>Remote</td>
-                            <td>50,000</td>
-                            <td>25, Apr</td>
-                        </tr>
-                        </tbody>
-                </table>
-            </div>
-        </main>
+<div class="container">
+   <app-sidebar></app-sidebar>
+  
+    <div class="main-content">
+      <div class="header">
+        <h2>Jobs Posted</h2>
+        <button class="search-btn">Search</button>
+      </div>
+  
+      <p class="description">Manage and review jobs</p>
+  
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Location</th>
+              <th>Salary</th>
+              <th>Date Posted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Software Dev</td>
+              <td>On-site</td>
+              <td>50,000</td>
+              <td>25, Apr</td>
+              <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Graphic Designer</td>
+              <td>Hybrid</td>
+              <td>50,000</td>
+              <td>25, Mar</td>
+              <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Quality Assurance</td>
+              <td>Remote</td>
+              <td>50,000</td>
+              <td>25, Apr</td>
+              <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
+  </div>
+  
