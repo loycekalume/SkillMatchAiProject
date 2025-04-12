@@ -1,102 +1,94 @@
-
 <body>
     <div class="container">
         <app-sidebar></app-sidebar>
 
         <!-- Main Content -->
-        <div class="main-content">
-            <div class="header">
-                <div class="header-left">
-                    <h2 class="page-title">Job seeker profile</h2>
-                </div>
-                <div class="header-right">
-                    <div class="platform-name">SkillMatch AI</div>
-                </div>
-            </div>
-
+        <main class="main-content">
             <div class="profile-header">
-                <div class="welcome-section">
-                    <h1>Welcome Loyce!</h1>
-                    <div class="profile-image">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Profile Picture">
-                    </div>
+                <div class="profile-title">
+                    <span class="profile-label">Profile Details</span>
+                    <h1 class="welcome-text">Welcome Loyce !</h1>
                 </div>
-                <div class="action-buttons">
-                    <button class="btn btn-outline">Edit</button>
-                    <button class="btn btn-primary">Save</button>
+                <div class="profile-actions">
+                    <button class="btn btn-edit">Edit</button>
+                    <button class="btn btn-save">Save</button>
                 </div>
             </div>
 
-            <div class="profile-content">
-                <div class="section">
-                    <h3 class="section-title">Personal Details</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="experience">Years of Experience</label>
-                            <input type="text" id="experience" class="form-control">
-                        </div>
-                    </div>
+            <div class="profile-photo-container">
+                <div class="profile-photo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=80&width=80" alt="Profile Photo">
+                </div>
+            </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="title">Professional Title</label>
-                            <input type="text" id="title" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="education">Education Level</label>
-                            <input type="text" id="education" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" class="form-control">
-                        </div>
+            <div class="profile-form">
+                <h2 class="section-title">Personal Details</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control">
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="portfolio">Portfolio List</label>
-                            <input type="text" id="portfolio" class="form-control">
-                        </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Years of Experience</label>
+                        <input type="text" id="experience" class="form-control">
                     </div>
                 </div>
 
-                <div class="section">
-                    <h3 class="section-title">Upload resume</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Professional Title</label>
+                        <input type="text" id="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="education">Education Level</label>
+                        <input type="text" id="education" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio URL</label>
+                        <input type="text" id="portfolio" class="form-control">
+                    </div>
+                </div>
+
+                <div class="resume-upload">
+                    <h2 class="upload-title">Upload resume</h2>
                     <div class="upload-area">
                         <div class="upload-icon">
                             <i class="fas fa-cloud-upload-alt"></i>
                         </div>
                         <p class="upload-text">Drag & drop your resume or <span class="browse-text">browse</span></p>
-                        <p class="upload-hint">Supported formats: PDF, DOCX, TXT (Max 5MB)</p>
+                        <p class="upload-format">Supported formats: PDF, DOCX, DOC (Max size: 5MB)</p>
                     </div>
                 </div>
 
-                <div class="section">
-                    <h3 class="section-title">Skills</h3>
+                <div class="skills-section">
+                    <h2 class="section-title">Skills</h2>
                     <div class="skills-container">
-                        <div class="skill-tag">Python</div>
-                        <div class="skill-tag">AI</div>
+                        <div class="skill-tag">Express</div>
+                        <div class="skill-tag">JS</div>
                         <div class="skill-tag">React</div>
                         <div class="skill-tag">CSS</div>
                         <div class="skill-add">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </body>

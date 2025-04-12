@@ -15,6 +15,7 @@ export class SidebarComponent {
     { link: '/jobseeker/profile', icon: 'fas fa-briefcase', text: 'My Profile', active: false },
     { link: '/jobseeker/ai-assistant', icon: 'fas fa-file-alt', text: 'AI Assistant', active: false },
     { link: '/jobseeker/interviews', icon: 'fas fa-user', text: 'Interviews', active: false },
+    { link: '/jobseeker/jobmatches', icon: 'fas fa-user', text: 'Job Matches', active: false },
     { link: '/jobseeker/careerpath', icon: 'fas fa-user', text: 'Career Path', active: false },
     
   ];

@@ -1,273 +1,395 @@
-body {
-    font-family: sans-serif;
+/* Base styles */
+* {
     margin: 0;
-    background-color: #f4f6f8;
-    color: #333;
-    line-height: 1.6;
-    height:100%;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.dashboard-container {
+body {
+    background-color: #f5f5f7;
+    color: #333;
+}
+
+.container {
     display: flex;
     min-height: 100vh;
 }
 
-
-
-/* Main Content Styles */
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-}
-
-.dashboard-header {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+/* Sidebar styles */
+.sidebar {
+    width: 240px;
+    background-color: #9575cd;
+    color: white;
+    position: fixed;
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 
-.welcome-text h1 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #555;
-}
-
-.search-bar input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stats-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.stats-card h3 {
-    margin-top: 0;
-    font-size: 1em;
-    color: #777;
-}
-
-.stats-card .value {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-.career-path-section, .skill-levels-section, .recommended-tests-section {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.career-path-section h2, .skill-levels-section h2, .recommended-tests-section h2 {
-    color: #555;
-    font-size: 1.2em;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.career-path-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.career-path-card {
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 15px;
-    text-align: center;
-}
-
-.career-path-card h3 {
-    margin-top: 0;
-    font-size: 1em;
-    color: #333;
-}
-
-.career-path-card p {
-    color: #777;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-}
-
-.career-path-card .progress-bar {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    height: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-.career-path-card .progress {
-    background-color: #7B68EE; /* Purple color */
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    border-radius: 5px;
+    padding: 20px 0;
 }
 
-.career-path-card .view-path-btn {
-    background-color: #7B68EE; /* Purple color */
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
+.sidebar-title {
+    font-size: 18px;
+    padding: 0 20px 20px;
+    text-align: center;
+    display: none; /* Hidden as per the design */
 }
 
-.career-path-card .view-path-btn:hover {
-    background-color: #6A5ACD;
+.sidebar-nav {
+    flex: 1;
 }
 
-.skill-levels ul {
+.nav-list {
     list-style: none;
     padding: 0;
 }
 
-.skill-levels li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.skill-levels li:last-child {
-    border-bottom: none;
-}
-
-.skill-levels .skill-name {
-    font-size: 0.9em;
-    color: #333;
-}
-
-.skill-levels .progress-bar {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    height: 8px;
-    width: 60%;
-    overflow: hidden;
-}
-
-.skill-levels .progress {
-    background-color: #27ae60; /* Green color */
-    height: 100%;
-    border-radius: 5px;
-}
-
-.recommended-tests ul {
-    list-style: none;
-    padding: 0;
-}
-
-.recommended-tests li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.recommended-tests li:last-child {
-    border-bottom: none;
-}
-
-.recommended-tests .test-name {
-    font-size: 0.9em;
-    color: #333;
+.nav-item {
     margin-bottom: 5px;
 }
 
-.recommended-tests .take-test-btn {
-    background-color: #f39c12; /* Orange color */
-    color: #fff;
+.nav-link {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-item.active .nav-link {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    margin-top: auto;
+    text-align: center;
+}
+
+.logout-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Main Content styles */
+.main-content {
+    flex: 1;
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.welcome-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Overview Cards styles */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.card-value {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Career Recommendations styles */
+.career-recommendations {
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.view-all {
+    color: #9575cd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.recommendation-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.recommendation-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.job-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.match-percentage {
+    color: #9575cd;
+    font-weight: 600;
+}
+
+.demand-level {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.demand-label {
+    color: #666;
+}
+
+.demand-value {
+    font-weight: 500;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.skill {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #555;
+}
+
+.explore-btn {
+    background-color: #9575cd;
+    color: white;
     border: none;
-    padding: 8px 15px;
     border-radius: 5px;
+    padding: 8px 15px;
+    width: 100%;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
-.recommended-tests .take-test-btn:hover {
-    background-color: #e67e22;
+.explore-btn:hover {
+    background-color: #8667b4;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard-container {
-        flex-direction: column;
-    }
+/* Two Column Layout */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
 
-    .sidebar {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 20px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+/* Skill Gap Analysis styles */
+.skill-gap {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
 
-    .sidebar h2 {
-        margin-bottom: 0;
-    }
+.skill-bars {
+    margin-top: 15px;
+}
 
-    .sidebar ul {
-        display: flex;
-        margin-left: auto;
-    }
+.skill-bar {
+    margin-bottom: 12px;
+}
 
-    .sidebar li {
-        margin-left: 10px;
-        margin-bottom: 0;
-    }
+.skill-name {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 
-    .sidebar .logout {
-        margin-top: 0;
-    }
+.progress-container {
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.progress-bar {
+    height: 100%;
+    background-color: #9575cd;
+    border-radius: 5px;
+}
 
-    .search-bar {
-        margin-top: 10px;
-    }
+.percentage {
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    color: #666;
+}
 
-    .career-path-grid {
+/* Recommended Tests styles */
+.recommended-tests {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.test-cards {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.test-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.test-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.test-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.test-description {
+    font-size: 12px;
+    color: #666;
+}
+
+.take-test-btn {
+    background-color: #9575cd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.take-test-btn:hover {
+    background-color: #8667b4;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .overview-cards,
+    .recommendation-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .two-column-layout {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 576px) {
-    .sidebar ul {
-        display: none; /* Hide navigation links on very small screens, consider a toggle */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
     }
-
+    
     .sidebar {
-        justify-content: center;
+        width: 100%;
+        height: auto;
+        position: relative;
     }
-
-    .sidebar h2 {
-        font-size: 1.5em;
+    
+    .nav-list {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+    }
+    
+    .nav-item {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+    
+    .nav-link {
+        padding: 8px 15px;
+        white-space: nowrap;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .overview-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .recommendation-cards {
+        grid-template-columns: 1fr;
     }
 }

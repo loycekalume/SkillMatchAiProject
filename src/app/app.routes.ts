@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 
 
+
+
 export const routes: Routes = [
     {
         path: '',
@@ -8,7 +10,35 @@ export const routes: Routes = [
             return import('./home/home.component').then(({ HomeComponent }) => HomeComponent);
         },
     },
-   
+    {
+        path: 'jobmatches',
+        loadComponent() {
+            return import('./Jobseeker/jobmatches/jobmatches.component').then(({ JobmatchesComponent }) => JobmatchesComponent);
+        },
+    },
+    {
+        path: 'profile',
+        loadComponent() {
+            return import('./Jobseeker/jobseeker-profile/jobseeker-profile.component').then(({JobseekerProfileComponent }) => JobseekerProfileComponent);
+        },
+    },
+    {
+        path: 'interviews',
+        loadComponent() {
+            return import('./Jobseeker/my-interviews/my-interviews.component').then(({MyInterviewsComponent}) => MyInterviewsComponent);
+        },
+    },
+    {
+        path: 'careerpath',
+        loadComponent() {
+            return import('./Jobseeker/careerpath/careerpath.component').then(({CareerpathComponent}) => CareerpathComponent);
+        },
+    },
+   {
+    path: 'ai-assistant',
+    loadComponent() {
+        return import('./Jobseeker/aiassistant/aiassistant.component').then(({AiassistantComponent}) => AiassistantComponent);
+    }},
     {
         path: 'login',
         loadComponent() {
@@ -21,19 +51,7 @@ export const routes: Routes = [
             return import('./sign-up/sign-up.component').then(({ SignUpComponent }) => SignUpComponent);
         },
     },
-    // { path: 'ai', component: AiAnalysisComponent },
-    // { path: 'applications', component: ApplicationsComponent },
-    // { path: 'jobsposted', component:JobsPostedComponent },
-    // { path: 'adminjobs', component: JobManagementComponent},
-    // { path: 'usermanagement', component: UserManagementComponent},
-    // { path: 'admin', component: AdminDashboardComponent},
-    // { path: 'jobseeker', component: JobseekerComponent},
-    // { path: 'careerpath', component: CareerpathComponent},
-    // { path: 'myinterviews', component: MyInterviewsComponent},
-    // { path: 'employerinterviews', component: EmployerInterviewsComponent},
-    // { path: 'chat', component: AiassistantComponent},
-    // { path: 'employer', component: EmployerComponent},
-    // { path: 'jobseekerProfile', component: JobseekerProfileComponent},
+    
     {
         path: 'admin',
         loadChildren: () => import('./Admin/admin.routes').then(m => m.ADMIN_ROUTES)

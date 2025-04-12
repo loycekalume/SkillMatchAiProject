@@ -4,7 +4,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 @Component({
   selector: 'app-aiassistant',
   standalone: true,
-  imports: [SidebarComponent],
+  // imports: [SidebarComponent],
   templateUrl: './aiassistant.component.html',
   styleUrl: './aiassistant.component.css'
 })

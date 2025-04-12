@@ -1,108 +1,158 @@
 <body>
-    <div class="dashboard-container">
+    <div class="container">
+        <!-- Sidebar -->
         <app-sidebar></app-sidebar>
+
+        <!-- Main Content -->
         <main class="main-content">
-            <div class="dashboard-header">
-                <div class="welcome-text">
-                    <h1>Welcome Loyce explore your career path</h1>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search">
-                </div>
+            <div class="welcome-banner">
+                <h1 class="welcome-text">Welcome Loyce explore your career path</h1>
             </div>
 
-            <section class="stats-grid">
-                <div class="stats-card">
-                    <h3>Profile strength</h3>
-                    <div class="value">78%</div>
+            <!-- Overview Cards -->
+            <section class="overview-cards">
+                <div class="card">
+                    <h3 class="card-title">Skills strength</h3>
+                    <div class="card-value">94%</div>
+                    <div class="card-subtitle">Excellent</div>
                 </div>
-                <div class="stats-card">
-                    <h3>Career Match</h3>
-                    <div class="value">84%</div>
-                    <p style="font-size: 0.8em; color: #777;">Based on skills & experience</p>
+                <div class="card">
+                    <h3 class="card-title">Career Match</h3>
+                    <div class="card-value">94%</div>
+                    <div class="card-subtitle">Excellent Fit</div>
                 </div>
-                <div class="stats-card">
-                    <h3>Tests Completed</h3>
-                    <div class="value">25</div>
+                <div class="card">
+                    <h3 class="card-title">Tests Completed</h3>
+                    <div class="card-value">26</div>
+                    <div class="card-subtitle">This month</div>
                 </div>
-                <div class="stats-card">
-                    <h3>Total Applications</h3>
-                    <div class="value">18</div>
+                <div class="card">
+                    <h3 class="card-title">Total Applications</h3>
+                    <div class="card-value">26</div>
+                    <div class="card-subtitle">This month</div>
                 </div>
             </section>
 
-            <section class="career-path-section">
-                <h2>Career path recommendations</h2>
-                <div class="career-path-grid">
-                    <div class="career-path-card">
-                        <h3>Frontend Development</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%;"></div>
+            <!-- Career Path Recommendations -->
+            <section class="career-recommendations">
+                <div class="section-header">
+                    <h2 class="section-title">Career path recommendations</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                        <div class="card-header">
+                            <h3 class="job-title">Frontend Development</h3>
+                            <div class="match-percentage">95% Match</div>
                         </div>
-                        <p>Demand: High</p>
-                        <button class="view-path-btn">View Path</button>
+                        <div class="card-content">
+                            <div class="demand-level">
+                                <span class="demand-label">Demand:</span>
+                                <span class="demand-value">High</span>
+                            </div>
+                            <div class="skills-container">
+                                <span class="skill">React</span>
+                                <span class="skill">JS</span>
+                                <span class="skill">Angular</span>
+                                <span class="skill">HTML</span>
+                            </div>
+                            <button class="explore-btn">Explore Career</button>
+                        </div>
                     </div>
-                    <div class="career-path-card">
-                        <h3>Backend Development</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 35%;"></div>
+                    <div class="recommendation-card">
+                        <div class="card-header">
+                            <h3 class="job-title">Senior Developer</h3>
+                            <div class="match-percentage">95% Match</div>
                         </div>
-                        <p>Demand: Medium</p>
-                        <button class="view-path-btn">View Path</button>
-                    </div>
-                    <div class="career-path-card">
-                        <h3>Data Science</h3>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 80%;"></div>
+                        <div class="card-content">
+                            <div class="demand-level">
+                                <span class="demand-label">Demand:</span>
+                                <span class="demand-value">High</span>
+                            </div>
+                            <div class="skills-container">
+                                <span class="skill">React</span>
+                                <span class="skill">JS</span>
+                                <span class="skill">Angular</span>
+                                <span class="skill">HTML</span>
+                            </div>
+                            <button class="explore-btn">Explore Career</button>
                         </div>
-                        <p>Demand: High</p>
-                        <button class="view-path-btn">View Path</button>
                     </div>
                 </div>
-                <a href="#" class="view-all-link" style="display: block; text-align: right; margin-top: 10px; color: #3498db; text-decoration: none; font-size: 0.9em;">View All</a>
             </section>
 
-            <section class="skill-levels-section">
-                <h2>Skill Levels</h2>
-                <ul>
-                    <li>
-                        <span class="skill-name">Web Accessibility</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 90%;"></div>
+            <!-- Two Column Layout for Skill Gap and Recommended Tests -->
+            <div class="two-column-layout">
+                <!-- Skill Gap Analysis -->
+                <section class="skill-gap">
+                    <h2 class="section-title">Skill Gap Analysis</h2>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="skill-name">JavaScript</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 95%"></div>
+                                <span class="percentage">95%</span>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <span class="skill-name">Frontend Frameworks</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 70%;"></div>
+                        <div class="skill-bar">
+                            <div class="skill-name">React</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 90%"></div>
+                                <span class="percentage">90%</span>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <span class="skill-name">Backend Technologies</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 45%;"></div>
+                        <div class="skill-bar">
+                            <div class="skill-name">HTML/CSS</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 85%"></div>
+                                <span class="percentage">85%</span>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </section>
+                        <div class="skill-bar">
+                            <div class="skill-name">Angular</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 80%"></div>
+                                <span class="percentage">80%</span>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">Node.js</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 75%"></div>
+                                <span class="percentage">75%</span>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">TypeScript</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 70%"></div>
+                                <span class="percentage">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="recommended-tests-section">
-                <h2>Recommended Skill Tests</h2>
-                <ul>
-                    <li>
-                        <h3 class="test-name">Web Accessibility Basics</h3>
-                        <button class="take-test-btn">Take Test</button>
-                    </li>
-                    <li>
-                        <h3 class="test-name">React Fundamentals</h3>
-                        <button class="take-test-btn">Take Test</button>
-                    </li>
-                    <li>
-                        <h3 class="test-name">Node.js Essentials</h3>
-                        <button class="take-test-btn">Take Test</button>
-                    </li>
-                </ul>
-            </section>
+                <!-- Recommended Skill Tests -->
+                <section class="recommended-tests">
+                    <h2 class="section-title">Recommended Skill Tests</h2>
+                    <div class="test-cards">
+                        <div class="test-card">
+                            <div class="test-info">
+                                <h3 class="test-title">Web Accessibility</h3>
+                                <p class="test-description">Test your knowledge of web accessibility standards</p>
+                            </div>
+                            <button class="take-test-btn">Take the test</button>
+                        </div>
+                        <div class="test-card">
+                            <div class="test-info">
+                                <h3 class="test-title">3D graphics</h3>
+                                <p class="test-description">Test your knowledge of 3D rendering and WebGL</p>
+                            </div>
+                            <button class="take-test-btn">Take the test</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
 </body>

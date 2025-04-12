@@ -1,73 +1,89 @@
 <body>
-    <div class="dashboard-container">
-        <app-sidebar></app-sidebar>
+    <div class="container">
+        <!-- Sidebar -->
+      <app-sidebar></app-sidebar>
+        <!-- Main Content -->
         <main class="main-content">
-            <div class="header">
-                <div class="welcome-section">
-                    <div class="welcome-text">
-                        <h1>Welcome Loyce</h1>
+            <header class="header">
+                <h1 class="welcome-text">Welcome Loyce</h1>
+                <div class="search-profile">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search" class="search-input">
                     </div>
-                    <div class="profile-info">
-                        <div class="notification">🔔</div>
-                        <img src="placeholder_profile.png" alt="Profile Picture">
+                    <div class="profile-image">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="Profile">
                     </div>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search">
-                </div>
-            </div>
+            </header>
 
-            <section class="stats-grid">
-                <div class="stats-card">
-                    <h3>Upcoming Interviews</h3>
-                    <div class="value">1</div>
+            <!-- Overview Cards -->
+            <section class="overview-cards">
+                <div class="card">
+                    <h3 class="card-title">Upcoming Interviews</h3>
+                    <div class="card-value">1</div>
+                    <div class="card-subtitle">Tomorrow</div>
                 </div>
-                <div class="stats-card">
-                    <h3>Applied Jobs</h3>
-                    <div class="value">85%</div>
-                    <p style="font-size: 0.8em; color: #777;">Profile strength</p>
+                <div class="card">
+                    <h3 class="card-title">Applied Jobs</h3>
+                    <div class="card-value">1</div>
+                    <div class="card-subtitle">This week</div>
                 </div>
-                <div class="stats-card">
-                    <h3>Messages</h3>
-                    <div class="value">3</div>
+                <div class="card">
+                    <h3 class="card-title">Profile strength</h3>
+                    <div class="card-value">85%</div>
+                    <div class="card-subtitle">Enhance your profile to get noticed</div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Messages</h3>
+                    <div class="card-value">3</div>
+                    <div class="card-subtitle">Unread messages from recruiters</div>
                 </div>
             </section>
 
+            <!-- Interviews Section -->
             <section class="interviews-section">
-                <h2>View Interviews</h2>
-                <div class="interview-table-container">
-                    <table class="interview-table">
+                <div class="section-header">
+                    <h2 class="section-title">View Interviews</h2>
+                </div>
+                <div class="interviews-table-container">
+                    <table class="interviews-table">
                         <thead>
                             <tr>
-                                <th>Job Title</th>
+                                <th>Job title</th>
                                 <th>Company</th>
                                 <th>Time and Date</th>
                                 <th>Status</th>
                                 <th>Type</th>
-                                <th>Actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Senior Frontend Developer</td>
+                                <td>Senior Frontend Engineer</td>
                                 <td>TechCorp</td>
-                                <td>Tomorrow, 10:00 AM - 11:00 AM</td>
-                                <td>Pending</td>
+                                <td>
+                                    <div>March 15</div>
+                                    <div>10:00 AM - 11:00 AM</div>
+                                </td>
+                                <td><span class="status-badge active">Active</span></td>
                                 <td>Video</td>
-                                <td><button class="join-button">Join</button></td>
+                                <td><button class="join-btn">Join</button></td>
                             </tr>
                             <tr>
-                                <td>Senior Frontend Developer</td>
+                                <td>Frontend Developer</td>
                                 <td>The Jitu</td>
-                                <td>Apr 15, 11:00 AM - 12:00 PM</td>
-                                <td>Pending</td>
+                                <td>
+                                    <div>April 10</div>
+                                    <div>10:00 AM - 11:00 AM</div>
+                                </td>
+                                <td><span class="status-badge pending">Pending</span></td>
                                 <td>Video</td>
-                                <td><button class="join-button">Join</button></td>
+                                <td></td>
                             </tr>
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </section>
         </main>
     </div>
-    </body>
+</body>

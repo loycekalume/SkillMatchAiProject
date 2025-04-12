@@ -1,0 +1,263 @@
+
+<body>
+  <div class="layout">
+    <app-sidebar></app-sidebar>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="header">
+          <div class="header-left">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+            <h1>All Job Matches</h1>
+          </div>
+          <p class="matches-count">Showing 24 matches based on your profile</p>
+        </div>
+
+        <div class="search-filter-section">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search job titles, skills, or companies">
+          </div>
+          
+          <div class="filter-sort">
+            <button class="filter-button">
+              <i class="fas fa-filter"></i>
+              Filters
+            </button>
+            
+            <div class="sort-dropdown">
+              <select>
+                <option value="match">Match Percentage</option>
+                <option value="recent">Most Recent</option>
+                <option value="salary">Salary</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="active-filters">
+          <div class="filter-header">
+            <h3>Active Filters:</h3>
+          </div>
+          <div class="filter-badges">
+            <span class="badge">
+              Remote
+              <button class="remove-filter">×</button>
+            </span>
+            <span class="badge">
+              Full-time
+              <button class="remove-filter">×</button>
+            </span>
+            <span class="badge">
+              React
+              <button class="remove-filter">×</button>
+            </span>
+            <button class="clear-all">Clear All</button>
+          </div>
+        </div>
+
+        <div class="job-grid">
+          <!-- Job Card 1 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">Senior Frontend Engineer</h2>
+              <div class="company-name">TechCorp Inc.</div>
+              <div class="job-details">
+                <span>Full-time</span>
+                <span class="separator">•</span>
+                <span>Remote</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Js</span>
+                <span class="skill-badge">Angular</span>
+                <span class="skill-badge">Express</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">95% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 95%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+
+          <!-- Job Card 2 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">Fullstack Developer</h2>
+              <div class="company-name">InnovateSoft</div>
+              <div class="job-details">
+                <span>Full-time</span>
+                <span class="separator">•</span>
+                <span>Remote</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Angular</span>
+                <span class="skill-badge">Express</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">90% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+
+          <!-- Job Card 3 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">React Native Developer</h2>
+              <div class="company-name">MobileApps Co.</div>
+              <div class="job-details">
+                <span>Full-time</span>
+                <span class="separator">•</span>
+                <span>Remote</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">React Native</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">TypeScript</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">88% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 88%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+
+          <!-- Job Card 4 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">UI/UX Designer</h2>
+              <div class="company-name">DesignHub</div>
+              <div class="job-details">
+                <span>Full-time</span>
+                <span class="separator">•</span>
+                <span>Remote</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">Figma</span>
+                <span class="skill-badge">Adobe XD</span>
+                <span class="skill-badge">Sketch</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">85% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+
+          <!-- Job Card 5 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">DevOps Engineer</h2>
+              <div class="company-name">CloudSystems</div>
+              <div class="job-details">
+                <span>Contract</span>
+                <span class="separator">•</span>
+                <span>Remote</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">AWS</span>
+                <span class="skill-badge">Docker</span>
+                <span class="skill-badge">Kubernetes</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">82% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 82%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+
+          <!-- Job Card 6 -->
+          <div class="job-card">
+            <div class="job-header">
+              <h2 class="job-title">Backend Developer</h2>
+              <div class="company-name">DataFlow Solutions</div>
+              <div class="job-details">
+                <span>Full-time</span>
+                <span class="separator">•</span>
+                <span>Hybrid</span>
+              </div>
+            </div>
+            <div class="job-content">
+              <div class="skills">
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">MongoDB</span>
+              </div>
+              <div class="match-container">
+                <div class="match-percentage">80% Match</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="job-footer">
+              <button class="apply-button">Apply Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="page-button" disabled>&lt;</button>
+          <button class="page-button active">1</button>
+          <button class="page-button">2</button>
+          <button class="page-button">3</button>
+          <button class="page-button">4</button>
+          <button class="page-button">&gt;</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Toggle sidebar on mobile
+    document.getElementById('mobileSidebarToggle').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+
+    // Toggle sidebar on desktop
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('collapsed');
+      document.querySelector('.main-content').classList.toggle('expanded');
+    });
+  </script>
+</body>
