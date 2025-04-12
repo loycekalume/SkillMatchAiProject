@@ -7,36 +7,36 @@ export const routes: Routes = [
             return import('./home/home.component').then(({ HomeComponent }) => HomeComponent);
         },
     },
-    {
-        path: 'jobmatches',
-        loadComponent() {
-            return import('./Jobseeker/jobmatches/jobmatches.component').then(({ JobmatchesComponent }) => JobmatchesComponent);
-        },
-    },
-    {
-        path: 'profile',
-        loadComponent() {
-            return import('./Jobseeker/jobseeker-profile/jobseeker-profile.component').then(({ JobseekerProfileComponent }) => JobseekerProfileComponent);
-        },
-    },
-    {
-        path: 'interviews',
-        loadComponent() {
-            return import('./Jobseeker/my-interviews/my-interviews.component').then(({ MyInterviewsComponent }) => MyInterviewsComponent);
-        },
-    },
-    {
-        path: 'careerpath',
-        loadComponent() {
-            return import('./Jobseeker/careerpath/careerpath.component').then(({ CareerpathComponent }) => CareerpathComponent);
-        },
-    },
-    {
-        path: 'ai-assistant',
-        loadComponent() {
-            return import('./Jobseeker/aiassistant/aiassistant.component').then(({ AiassistantComponent }) => AiassistantComponent);
-        }
-    },
+    // {
+    //     path: 'jobmatches',
+    //     loadComponent() {
+    //         return import('./Jobseeker/jobmatches/jobmatches.component').then(({ JobmatchesComponent }) => JobmatchesComponent);
+    //     },
+    // },
+    // {
+    //     path: 'profile',
+    //     loadComponent() {
+    //         return import('./Jobseeker/jobseeker-profile/jobseeker-profile.component').then(({ JobseekerProfileComponent }) => JobseekerProfileComponent);
+    //     },
+    // },
+    // {
+    //     path: 'interviews',
+    //     loadComponent() {
+    //         return import('./Jobseeker/my-interviews/my-interviews.component').then(({ MyInterviewsComponent }) => MyInterviewsComponent);
+    //     },
+    // },
+    // {
+    //     path: 'careerpath',
+    //     loadComponent() {
+    //         return import('./Jobseeker/careerpath/careerpath.component').then(({ CareerpathComponent }) => CareerpathComponent);
+    //     },
+    // },
+    // {
+    //     path: 'ai-assistant',
+    //     loadComponent() {
+    //         return import('./Jobseeker/aiassistant/aiassistant.component').then(({ AiassistantComponent }) => AiassistantComponent);
+    //     }
+    // },
     {
         path: 'login',
         loadComponent() {
