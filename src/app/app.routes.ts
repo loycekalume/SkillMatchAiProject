@@ -52,7 +52,7 @@ export const routes: Routes = [
 
     {
         path: 'admin',
-        loadChildren: () => import('./Admin/admin.routes').then(m => m.ADMIN_ROUTES)
+        loadChildren: () => import('../app/Admin/admin.routes').then(m => m.ADMIN_ROUTES)
     },
     {
         path: 'employer',
