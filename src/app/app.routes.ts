@@ -61,6 +61,6 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        loadChildren: () => import('./Admin/admin.routes').then(m => m.ADMIN_ROUTES)
+        loadChildren: () => import('./Admin/superUser.routes').then(m => m.ADMIN_ROUTES)
     },
 ];
