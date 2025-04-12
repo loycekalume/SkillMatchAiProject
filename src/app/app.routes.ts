@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 
-
-
-
 export const routes: Routes = [
     {
         path: '',
@@ -19,26 +16,27 @@ export const routes: Routes = [
     {
         path: 'profile',
         loadComponent() {
-            return import('./Jobseeker/jobseeker-profile/jobseeker-profile.component').then(({JobseekerProfileComponent }) => JobseekerProfileComponent);
+            return import('./Jobseeker/jobseeker-profile/jobseeker-profile.component').then(({ JobseekerProfileComponent }) => JobseekerProfileComponent);
         },
     },
     {
         path: 'interviews',
         loadComponent() {
-            return import('./Jobseeker/my-interviews/my-interviews.component').then(({MyInterviewsComponent}) => MyInterviewsComponent);
+            return import('./Jobseeker/my-interviews/my-interviews.component').then(({ MyInterviewsComponent }) => MyInterviewsComponent);
         },
     },
     {
         path: 'careerpath',
         loadComponent() {
-            return import('./Jobseeker/careerpath/careerpath.component').then(({CareerpathComponent}) => CareerpathComponent);
+            return import('./Jobseeker/careerpath/careerpath.component').then(({ CareerpathComponent }) => CareerpathComponent);
         },
     },
-   {
-    path: 'ai-assistant',
-    loadComponent() {
-        return import('./Jobseeker/aiassistant/aiassistant.component').then(({AiassistantComponent}) => AiassistantComponent);
-    }},
+    {
+        path: 'ai-assistant',
+        loadComponent() {
+            return import('./Jobseeker/aiassistant/aiassistant.component').then(({ AiassistantComponent }) => AiassistantComponent);
+        }
+    },
     {
         path: 'login',
         loadComponent() {
@@ -51,17 +49,17 @@ export const routes: Routes = [
             return import('./sign-up/sign-up.component').then(({ SignUpComponent }) => SignUpComponent);
         },
     },
-    
+
     {
         path: 'admin',
         loadChildren: () => import('./Admin/admin.routes').then(m => m.ADMIN_ROUTES)
-        }, 
-        {
-            path: 'employer',
-            loadChildren: () => import('./Employer/employer.routes').then(m => m.EMPLOYER_ROUTES)
-            } ,
-            {
-                path: 'jobseeker',
-                loadChildren: () => import('./Jobseeker/jobseeker.routes').then(m => m.JOBSEEKER_ROUTES)
-                } 
+    },
+    {
+        path: 'employer',
+        loadChildren: () => import('./Employer/employer.routes').then(m => m.EMPLOYER_ROUTES)
+    },
+    {
+        path: 'jobseeker',
+        loadChildren: () => import('./Jobseeker/jobseeker.routes').then(m => m.JOBSEEKER_ROUTES)
+    }
 ];
