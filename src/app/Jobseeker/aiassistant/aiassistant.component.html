@@ -1,134 +1,115 @@
 
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-title">
+    <div class="app-container">
+       
+        <app-sidebar></app-sidebar>
+
+        <main class="main-content">
+            <header class="main-header">
                 <h1>AI Assistant</h1>
-            </div>
-            <div class="header-user">
-                <div class="notification">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </div>
-                <div class="user-profile">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="User" class="user-avatar">
-                    <div class="user-info">
-                        <div class="user-role">User</div>
-                        <div class="user-name">John Doe</div>
-                        <div class="user-title">Frontend Developer</div>
+                <div class="user-info">
+                    <div class="notifications">
+                        <span class="notification-badge">3</span>
+                        <i class="fas fa-bell"></i>
                     </div>
+                    <span class="user-name">John Kimathi</span>
+                    <span class="user-role">Frontend Engineer</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h2 class="sidebar-title">Conversation History</h2>
-                <button class="new-chat-btn">
-                    <i class="fas fa-plus"></i>
-                    New Chat
-                </button>
-                <div class="conversation-list">
-                    <div class="conversation-item active">
-                        <div class="conversation-icon">
-                            <i class="fas fa-comment-alt"></i>
+            <div class="chat-container">
+                <aside class="conversation-history">
+                    <h2>Conversation History</h2>
+                    <button class="new-chat-button">
+                        <i class="fas fa-plus"></i>
+                        <span>New Chat</span>
+                    </button>
+                    <div class="history-item active">
+                        <div class="history-icon">
+                            <i class="fas fa-comment"></i>
                         </div>
-                        <div class="conversation-details">
-                            <div class="conversation-title">Job Search Help</div>
-                            <div class="conversation-time">Today, 10:30 AM</div>
+                        <div class="history-content">
+                            <div class="item-title">Job Search Help</div>
+                            <div class="item-date">Today, 10:30 AM</div>
                         </div>
                     </div>
-                    <div class="conversation-item">
-                        <div class="conversation-icon">
-                            <i class="fas fa-comment-alt"></i>
+                    <div class="history-item">
+                        <div class="history-icon">
+                            <i class="fas fa-comment"></i>
                         </div>
-                        <div class="conversation-details">
-                            <div class="conversation-title">Resume Review</div>
-                            <div class="conversation-time">Yesterday, 2:15 PM</div>
-                        </div>
-                    </div>
-                    <div class="conversation-item">
-                        <div class="conversation-icon">
-                            <i class="fas fa-comment-alt"></i>
-                        </div>
-                        <div class="conversation-details">
-                            <div class="conversation-title">Interview Preparation</div>
-                            <div class="conversation-time">Mar 30, 2025</div>
+                        <div class="history-content">
+                            <div class="item-title">Resume Review</div>
+                            <div class="item-date">Yesterday, 2:15 PM</div>
                         </div>
                     </div>
-                </div>
-            </aside>
+                    <div class="history-item">
+                        <div class="history-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="history-content">
+                            <div class="item-title">Interview Preparation</div>
+                            <div class="item-date">Mar 30, 2025</div>
+                        </div>
+                    </div>
+                </aside>
 
-            <!-- Chat Area -->
-            <main class="chat-area">
-                <div class="chat-messages">
-                    <!-- AI Message -->
-                    <div class="message ai-message">
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-text">
-                                Hello! I'm your SkillMatch AI assistant. How can I help with your job search today?
+                <div class="chat-area">
+                    <div class="messages-container">
+                        <div class="message bot-message">
+                            <div class="avatar bot-avatar">
+                                <i class="fas fa-robot"></i>
                             </div>
-                            <div class="message-time">10:30 AM</div>
-                        </div>
-                    </div>
-
-                    <!-- User Message -->
-                    <div class="message user-message">
-                        <div class="message-content">
-                            <div class="message-text">
-                                Hi! I'm looking for frontend developer positions that match my skills.
+                            <div class="message-content">
+                                <p>Hello! I'm your SkillMatch AI assistant. How can I help with your job search today?</p>
+                                <span class="message-time">10:30 AM</span>
                             </div>
-                            <div class="message-time">10:32 AM</div>
                         </div>
-                        <div class="message-avatar">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=30&width=30" alt="User">
-                        </div>
-                    </div>
-
-                    <!-- AI Message -->
-                    <div class="message ai-message">
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-text">
-                                Great! Based on your profile, I've found 5 new job postings that match your skills. The top match is a Senior Frontend Developer position at TechCorp with a 95% match to your skills. Would you like me to show you the details?
+                        <div class="message user-message">
+                            <div class="avatar user-avatar">
+                                <i class="fas fa-user"></i>
                             </div>
-                            <div class="message-time">10:33 AM</div>
+                            <div class="message-content">
+                                <p>Hi! I'm looking for frontend developer positions that match my skills.</p>
+                                <span class="message-time">10:32 AM</span>
+                            </div>
+                        </div>
+                        <div class="message bot-message">
+                            <div class="avatar bot-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Great! Based on your profile, I've found 5 new job postings that match your skills. The top match is a Senior Frontend Developer position at TechCorp with a 95% match to your skills. Would you like me to show you the details?</p>
+                                <span class="message-time">10:33 AM</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Chat Input -->
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <input type="text" class="chat-input" placeholder="Type your message...">
-                        <div class="chat-input-actions">
-                            <button class="input-action-btn">
-                                <i class="fas fa-paperclip"></i>
-                            </button>
-                            <button class="input-action-btn">
-                                <i class="fas fa-microphone"></i>
-                            </button>
-                            <button class="input-action-btn send-btn">
+                    <div class="input-container">
+                        <div class="input-area">
+                            <div class="input-box">
+                                <input type="text" placeholder="Type your message...">
+                                <div class="input-actions">
+                                    <button class="input-action-btn">
+                                        <i class="fas fa-paperclip"></i>
+                                    </button>
+                                    <button class="input-action-btn">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="send-button">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
-                    </div>
-                    <div class="quick-replies">
-                        <button class="quick-reply-btn">Yes, help me apply</button>
-                        <button class="quick-reply-btn">Show me more jobs</button>
-                        <button class="quick-reply-btn">What skills should I improve?</button>
+                        <div class="suggestion-buttons">
+                            <button class="suggestion-button">Yes, help me apply</button>
+                            <button class="suggestion-button">Show me more jobs</button>
+                            <button class="suggestion-button">What skills should I improve?</button>
+                        </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
 </body>

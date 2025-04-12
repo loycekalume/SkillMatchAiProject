@@ -7,16 +7,16 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule,CommonModule],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css','../jobseeker-dashboard/jobseeker-dashboard.component.css'],
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
   menuItems = [
     { link: '/jobseeker/dashboard', icon: 'fas fa-home', text: 'Dashboard', active: true },
-    { link: '/jobseeker/profile', icon: 'fas fa-briefcase', text: 'My Profile', active: false },
-    { link: '/jobseeker/ai-assistant', icon: 'fas fa-file-alt', text: 'AI Assistant', active: false },
-    { link: '/jobseeker/interviews', icon: 'fas fa-user', text: 'Interviews', active: false },
-    { link: '/jobseeker/jobmatches', icon: 'fas fa-user', text: 'Job Matches', active: false },
-    { link: '/jobseeker/careerpath', icon: 'fas fa-user', text: 'Career Path', active: false },
+    { link: '/jobseeker/profile', icon: 'fas fa-user', text: 'My Profile', active: false },
+    { link: '/jobseeker/ai-assistant', icon: 'fas fa-brain', text: 'AI Assistant', active: false },
+    { link: '/jobseeker/interviews', icon: 'fas fa-calendar', text: 'Interviews', active: false },
+    { link: '/jobseeker/jobmatches', icon: 'fas fa-briefcase', text: 'Job Matches', active: false },
+    { link: '/jobseeker/careerpath', icon: 'fas fa-chart-line', text: 'Career Path', active: false },
     
   ];
   

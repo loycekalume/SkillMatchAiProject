@@ -1,4 +1,3 @@
-
 /* Sidebar styles */
 .sidebar {
     width: 240px;
@@ -13,46 +12,118 @@
 .sidebar-header {
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-header h2 {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .sidebar-nav {
+    flex: 1;
     padding: 20px 0;
 }
 
-.nav-list {
+.sidebar-nav ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Adding nav-list styles directly to ul */
 }
 
-.nav-item {
+.sidebar-nav li {
     margin-bottom: 5px;
+    /* Adding nav-item styles directly to li */
 }
 
-.nav-link {
+.sidebar-nav a {
     display: flex;
     align-items: center;
     padding: 12px 20px;
     color: white;
     text-decoration: none;
     transition: background-color 0.3s;
+    border-radius: 4px;
+    margin: 0 8px;
+    /* Adding nav-link styles directly to a */
 }
 
-.nav-item.active .nav-link {
+
+.sidebar-nav a.active {
     background-color: rgba(255, 255, 255, 0.2);
     font-weight: bold;
 }
 
-.nav-link:hover {
+.sidebar-nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.nav-link i {
-    margin-right: 10px;
+.sidebar-nav i {
+    margin-right: 12px;
     width: 20px;
     text-align: center;
+    font-size: 16px;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-footer a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.sidebar-footer a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.sidebar-footer i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .sidebar-nav {
+        padding: 10px 0;
+    }
+    
+    .sidebar-nav ul {
+        display: flex;
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+    
+    .sidebar-nav li {
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+    
+    .sidebar-nav a {
+        padding: 10px 15px;
+        margin: 0;
+        white-space: nowrap;
+    }
+    
+    .sidebar-footer {
+        display: none; /* Hide on mobile or show differently */
+    }
 }
