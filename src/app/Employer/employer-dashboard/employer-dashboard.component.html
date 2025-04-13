@@ -12,6 +12,7 @@
                     <input type="text" placeholder="Search candidate, jobs..." class="search-input">
                     <i data-feather="search" class="search-icon"></i>
                 </div>
+                <button class="post" (click)="openJobModal()">+ Post Job</button>
             </header>
 
             <!-- Stats Cards -->
@@ -64,16 +65,15 @@
                                 <span class="skill">HTML</span>
                             </div>
                         </div>
-                        <div class="candidate-actions">
-                            <button class="action-btn schedule">
-                                <i data-feather="calendar"></i>
-                                Schedule Interview
-                            </button>
-                            <button class="action-btn hire">
-                                <i data-feather="user-check"></i>
-                                Hire
-                            </button>
-                        </div>
+                        <button class="action-btn schedule" (click)="openInterviewModal({
+                            id: 1, 
+                            name: 'John Doe', 
+                            position: 'Backend Manager',
+                            initials: 'JD'
+                          }); $event.stopPropagation();">
+                            <i data-feather="calendar"></i>
+                            Schedule Interview
+                          </button>
                     </div>
                     
                     <!-- Candidate Card 2 -->
@@ -99,16 +99,15 @@
                                 <span class="skill">HTML</span>
                             </div>
                         </div>
-                        <div class="candidate-actions">
-                            <button class="action-btn schedule">
-                                <i data-feather="calendar"></i>
-                                Schedule Interview
-                            </button>
-                            <button class="action-btn hire">
-                                <i data-feather="user-check"></i>
-                                Hire
-                            </button>
-                        </div>
+                        <button class="action-btn schedule" (click)="openInterviewModal({
+                            id: 2, 
+                            name: 'Alice Smith', 
+                            position: 'Layout Manager',
+                            initials: 'AS'
+                          }); $event.stopPropagation();">
+                            <i data-feather="calendar"></i>
+                            Schedule Interview
+                          </button>
                     </div>
                 </div>
             </section>
@@ -210,11 +209,165 @@
             </section>
         </main>
     </div>
-
-    <script>
-        // Initialize Feather icons
-        document.addEventListener('DOMContentLoaded', function() {
-            feather.replace();
-        });
-    </script>
+    <!-- Job Post Modal -->
+<div class="modal-overlay" [ngClass]="{'active': isJobModalOpen}" (click)="closeJobModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Post a job</h2>
+        <button class="close-button" (click)="closeJobModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="jobForm" (ngSubmit)="submitJobForm()">
+          <div class="form-group">
+            <label for="jobTitle">Job Title</label>
+            <input type="text" id="jobTitle" formControlName="jobTitle" class="form-control">
+            <div *ngIf="jobForm.get('jobTitle')?.invalid && jobForm.get('jobTitle')?.touched" class="error-message">
+              Job title is required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="jobDescription">Job description</label>
+            <textarea id="jobDescription" formControlName="jobDescription" class="form-control" rows="4"></textarea>
+            <div *ngIf="jobForm.get('jobDescription')?.invalid && jobForm.get('jobDescription')?.touched" class="error-message">
+              Job description is required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="jobSkills">Job Skills and requirements</label>
+            <input type="text" id="jobSkills" formControlName="jobSkills" class="form-control">
+            <div *ngIf="jobForm.get('jobSkills')?.invalid && jobForm.get('jobSkills')?.touched" class="error-message">
+              Job skills are required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="text" id="salary" formControlName="salary" class="form-control">
+            <div *ngIf="jobForm.get('salary')?.invalid && jobForm.get('salary')?.touched" class="error-message">
+              Salary is required
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="post-button" [disabled]="jobForm.invalid">Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- Interview Scheduling Modal -->
+<div class="modal-overlay" [ngClass]="{'active': isInterviewModalOpen}" (click)="closeInterviewModal()">
+    <div class="modal-content interview-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Schedule Interview</h2>
+        <button class="close-button" (click)="closeInterviewModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Candidate Preview -->
+        <div class="candidate-preview">
+          <div class="candidate-avatar">{{ selectedCandidate?.initials || 'JD' }}</div>
+          <div class="candidate-info">
+            <h3 class="candidate-name">{{ selectedCandidate?.name || 'John Doe' }}</h3>
+            <p class="candidate-position">{{ selectedCandidate?.position || 'Backend Manager' }}</p>
+          </div>
+        </div>
+        
+        <form [formGroup]="interviewForm" (ngSubmit)="submitInterviewForm()">
+          <!-- Interview Date -->
+          <div class="form-group">
+            <label for="interviewDate">Interview Date</label>
+            <input type="date" id="interviewDate" formControlName="interviewDate" class="form-control" [min]="minDate">
+            <div *ngIf="interviewForm.get('interviewDate')?.invalid && interviewForm.get('interviewDate')?.touched" class="error-message">
+              Valid interview date is required
+            </div>
+          </div>
+          
+          <!-- Time Slots -->
+          <div class="form-group">
+            <label>Available Time Slots</label>
+            <div class="time-slots">
+              <div *ngFor="let slot of timeSlots" 
+                   class="time-slot" 
+                   [ngClass]="{'selected': selectedTimeSlot === slot}"
+                   (click)="selectTimeSlot(slot)">
+                {{ slot }}
+              </div>
+            </div>
+            <div *ngIf="!selectedTimeSlot && isFormSubmitted" class="error-message">
+              Please select a time slot
+            </div>
+          </div>
+          
+          <!-- Interview Duration -->
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <select id="duration" formControlName="duration" class="form-control">
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="90">1.5 hours</option>
+              <option value="120">2 hours</option>
+            </select>
+          </div>
+          
+          <!-- Interview Type -->
+          <div class="form-group">
+            <label>Interview Type</label>
+            <div class="interview-type-options">
+              <div class="type-option" 
+                   [ngClass]="{'selected': selectedInterviewType === 'video'}"
+                   (click)="selectInterviewType('video')">
+                <i data-feather="video"></i>
+                <span>Video Call</span>
+              </div>
+              <div class="type-option" 
+                   [ngClass]="{'selected': selectedInterviewType === 'phone'}"
+                   (click)="selectInterviewType('phone')">
+                <i data-feather="phone"></i>
+                <span>Phone Call</span>
+              </div>
+              <div class="type-option" 
+                   [ngClass]="{'selected': selectedInterviewType === 'inperson'}"
+                   (click)="selectInterviewType('inperson')">
+                <i data-feather="users"></i>
+                <span>In Person</span>
+              </div>
+            </div>
+            <div *ngIf="!selectedInterviewType && isFormSubmitted" class="error-message">
+              Please select an interview type
+            </div>
+          </div>
+          
+          <!-- Interviewers -->
+          <div class="form-group">
+            <label for="interviewers">Interviewers</label>
+            <select id="interviewers" formControlName="interviewers" class="form-control" multiple>
+              <option *ngFor="let interviewer of interviewersList" [value]="interviewer.id">
+                {{ interviewer.name }} ({{ interviewer.role }})
+              </option>
+            </select>
+            <div *ngIf="interviewForm.get('interviewers')?.invalid && interviewForm.get('interviewers')?.touched" class="error-message">
+              Please select at least one interviewer
+            </div>
+          </div>
+          
+          <!-- Notes -->
+          <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" formControlName="notes" class="form-control" rows="3" 
+                      placeholder="Add any specific details or questions for the interview..."></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-button" (click)="closeInterviewModal()">Cancel</button>
+            <button type="submit" class="schedule-button">Schedule</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+   
 </body>
