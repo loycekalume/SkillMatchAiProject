@@ -1,0 +1,94 @@
+<div class="container">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Career Paths</h1>
+        <div class="search-profile">
+          <div class="search-container">
+            <input 
+              type="text" 
+              placeholder="Search career paths or skills" 
+              class="search-input"
+              [(ngModel)]="searchTerm"
+              (input)="applyFilters()">
+          </div>
+          <div class="profile-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="Profile">
+          </div>
+        </div>
+      </header>
+  
+      <!-- Filters Section -->
+      <section class="filters-section">
+        <div class="filter-group">
+          <label for="demandFilter">Demand:</label>
+          <select 
+            id="demandFilter" 
+            [(ngModel)]="selectedDemand"
+            (change)="applyFilters()">
+            <option *ngFor="let option of demandOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="matchFilter">Match Percentage:</label>
+          <select 
+            id="matchFilter" 
+            [(ngModel)]="selectedMatchRange"
+            (change)="applyFilters()">
+            <option *ngFor="let option of matchRangeOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        
+        <button class="reset-btn" (click)="resetFilters()">Reset Filters</button>
+      </section>
+  
+      <!-- Career Paths Grid -->
+      <section class="career-paths-grid">
+        <div class="career-path-card" *ngFor="let path of filteredPaths">
+          <div class="card-header">
+            <h2 class="career-title">{{ path.title }}</h2>
+            <div class="match-badge">{{ path.matchPercentage }} Match</div>
+          </div>
+          
+          <div class="demand-section">
+            <span class="label">Demand:</span>
+            <span class="demand-badge" [ngClass]="path.demand.toLowerCase()">{{ path.demand }}</span>
+          </div>
+          
+          <div class="skills-section">
+            <span class="skill" *ngFor="let skill of path.skills">{{ skill }}</span>
+          </div>
+          
+          <div class="description-section">
+            <p>{{ path.description }}</p>
+          </div>
+          
+          <div class="stats-section">
+            <div class="stat">
+              <span class="stat-label">Avg. Salary:</span>
+              <span class="stat-value">{{ path.averageSalary }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Growth:</span>
+              <span class="stat-value">{{ path.growthRate }}</span>
+            </div>
+          </div>
+          
+          <button class="explore-btn">Explore Career</button>
+        </div>
+        
+        <!-- Empty state when no results -->
+        <div class="empty-state" *ngIf="filteredPaths.length === 0">
+          <div class="empty-icon">🔍</div>
+          <h3>No career paths found</h3>
+          <p>Try adjusting your filters or search term</p>
+          <button class="reset-btn" (click)="resetFilters()">Reset Filters</button>
+        </div>
+      </section>
+    </main>
+  </div>

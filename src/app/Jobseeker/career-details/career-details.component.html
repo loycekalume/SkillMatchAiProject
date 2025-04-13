@@ -1,0 +1,222 @@
+<div class="container">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Back button -->
+      <div class="back-link">
+        <button class="back-btn" (click)="goBack()">
+          <span class="back-icon">←</span> Back to Career Paths
+        </button>
+      </div>
+      
+      <!-- Loading state -->
+      <div class="loading-container" *ngIf="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading career path details...</p>
+      </div>
+      
+      <!-- Career path details -->
+      <div class="career-detail-container" *ngIf="!loading && careerPath">
+        <!-- Header section -->
+        <header class="career-header">
+          <div class="career-header-content">
+            <h1 class="career-title">{{ careerPath.title }}</h1>
+            <div class="career-meta">
+              <div class="match-badge">{{ careerPath.matchPercentage }} Match</div>
+              <div class="demand-badge" [ngClass]="careerPath.demand.toLowerCase()">
+                {{ careerPath.demand }} Demand
+              </div>
+            </div>
+          </div>
+          <div class="career-stats">
+            <div class="stat-box">
+              <div class="stat-label">Average Salary</div>
+              <div class="stat-value">{{ careerPath.averageSalary }}</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Growth Rate</div>
+              <div class="stat-value">{{ careerPath.growthRate }}</div>
+            </div>
+          </div>
+        </header>
+        
+        <!-- Navigation tabs -->
+        <div class="tabs-container">
+          <div class="tabs">
+            <button 
+              class="tab-btn" 
+              [class.active]="activeTab === 'overview'"
+              (click)="setActiveTab('overview')">
+              Overview
+            </button>
+            <button 
+              class="tab-btn" 
+              [class.active]="activeTab === 'skills'"
+              (click)="setActiveTab('skills')">
+              Skills
+            </button>
+            <button 
+              class="tab-btn" 
+              [class.active]="activeTab === 'education'"
+              (click)="setActiveTab('education')">
+              Education & Certifications
+            </button>
+            <button 
+              class="tab-btn" 
+              [class.active]="activeTab === 'progression'"
+              (click)="setActiveTab('progression')">
+              Career Progression
+            </button>
+            <button 
+              class="tab-btn" 
+              [class.active]="activeTab === 'jobs'"
+              (click)="setActiveTab('jobs')">
+              Job Listings
+            </button>
+          </div>
+        </div>
+        
+        <!-- Tab content -->
+        <div class="tab-content">
+          <!-- Overview tab -->
+          <div class="tab-pane" *ngIf="activeTab === 'overview'">
+            <div class="content-section">
+              <h2 class="section-title">Career Description</h2>
+              <p class="description">{{ careerPath.description }}</p>
+            </div>
+            
+            <div class="content-section">
+              <h2 class="section-title">Job Outlook</h2>
+              <p class="description">{{ careerPath.jobOutlook }}</p>
+            </div>
+            
+            <div class="content-section">
+              <h2 class="section-title">Key Skills</h2>
+              <div class="skills-overview">
+                <div class="skill-tag" *ngFor="let skill of careerPath.skills.slice(0, 6)">
+                  {{ skill.name }}
+                </div>
+                <div class="more-skills" *ngIf="careerPath.skills.length > 6">
+                  +{{ careerPath.skills.length - 6 }} more
+                </div>
+              </div>
+            </div>
+            
+            <div class="content-section">
+              <h2 class="section-title">Related Career Paths</h2>
+              <div class="related-careers">
+                <div class="related-career-card" *ngFor="let related of careerPath.relatedCareers">
+                  <h3 class="related-title">{{ related.title }}</h3>
+                  <div class="related-match">{{ related.matchPercentage }} Match</div>
+                  <button class="explore-btn" (click)="navigateToCareerPath(related.id)">
+                    Explore
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Skills tab -->
+          <div class="tab-pane" *ngIf="activeTab === 'skills'">
+            <div class="content-section">
+              <h2 class="section-title">Required Skills</h2>
+              <p class="description">These are the key skills needed to succeed as a {{ careerPath.title }}.</p>
+              
+              <div class="skills-grid">
+                <div class="skill-card" *ngFor="let skill of careerPath.skills">
+                  <div class="skill-header">
+                    <h3 class="skill-name">{{ skill.name }}</h3>
+                    <div class="skill-importance" [ngClass]="getImportanceClass(skill.importance)">
+                      {{ skill.importance }}
+                    </div>
+                  </div>
+                  <div class="skill-level">
+                    <div class="level-label">Proficiency Level:</div>
+                    <div class="level-bars">
+                      <div class="level-bar" [ngClass]="getSkillLevelClass(skill.level)">
+                        <div class="level-indicator" *ngFor="let i of [1,2,3,4,5]"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Education tab -->
+          <div class="tab-pane" *ngIf="activeTab === 'education'">
+            <div class="content-section">
+              <h2 class="section-title">Education Requirements</h2>
+              <ul class="education-list">
+                <li *ngFor="let req of careerPath.educationRequirements">{{ req }}</li>
+              </ul>
+            </div>
+            
+            <div class="content-section">
+              <h2 class="section-title">Recommended Certifications</h2>
+              <div class="certifications-grid">
+                <div class="certification-card" *ngFor="let cert of careerPath.certifications">
+                  <h3 class="cert-name">{{ cert.name }}</h3>
+                  <div class="cert-provider">{{ cert.provider }}</div>
+                  <div class="cert-duration">Duration: {{ cert.duration }}</div>
+                  <p class="cert-description">{{ cert.description }}</p>
+                  <a [href]="cert.url" target="_blank" class="cert-link">Learn More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Career Progression tab -->
+          <div class="tab-pane" *ngIf="activeTab === 'progression'">
+            <div class="content-section">
+              <h2 class="section-title">Career Progression Path</h2>
+              <p class="description">Here's how your career could progress in this field:</p>
+              
+              <div class="progression-timeline">
+                <div class="timeline-item" *ngFor="let step of careerPath.careerProgression; let i = index">
+                  <div class="timeline-marker">{{ i + 1 }}</div>
+                  <div class="timeline-content">
+                    <h3 class="timeline-title">{{ step.title }}</h3>
+                    <div class="timeline-meta">
+                      <div class="timeline-years">{{ step.yearsExperience }}</div>
+                      <div class="timeline-salary">{{ step.salary }}</div>
+                    </div>
+                    <p class="timeline-description">{{ step.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Job Listings tab -->
+          <div class="tab-pane" *ngIf="activeTab === 'jobs'">
+            <div class="content-section">
+              <h2 class="section-title">Current Job Openings</h2>
+              <p class="description">These job listings match your profile and the {{ careerPath.title }} career path:</p>
+              
+              <div class="job-listings">
+                <div class="job-card" *ngFor="let job of careerPath.jobListings">
+                  <div class="job-header">
+                    <h3 class="job-title">{{ job.title }}</h3>
+                    <div class="job-company">{{ job.company }}</div>
+                  </div>
+                  <div class="job-details">
+                    <div class="job-location">{{ job.location }}</div>
+                    <div class="job-salary">{{ job.salary }}</div>
+                    <div class="job-date">Posted {{ job.postedDate }}</div>
+                  </div>
+                  <a [href]="job.url" class="apply-btn">Apply Now</a>
+                </div>
+              </div>
+              
+              <div class="view-more-container">
+                <button class="view-more-btn">View More Job Listings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>

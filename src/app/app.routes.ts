@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CareerDetailsComponent } from './Jobseeker/career-details/career-details.component';
 
 export const routes: Routes = [
     {
@@ -61,4 +62,9 @@ export const routes: Routes = [
         path: 'admin',
         loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
     },
+    {
+        path: 'career-paths/:id',
+        component: CareerDetailsComponent
+      }
+      
 ];
