@@ -1,0 +1,122 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="closeModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Apply for {{ jobTitle }}</h2>
+        <button class="close-btn" (click)="closeModal($event)">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="job-summary">
+          <h3>{{ jobTitle }}</h3>
+          <p *ngIf="companyName">{{ companyName }}</p>
+          <div class="job-skills" *ngIf="jobSkills && jobSkills.length > 0">
+            <span class="skill" *ngFor="let skill of jobSkills">{{ skill }}</span>
+          </div>
+        </div>
+        
+        <form [formGroup]="applicationForm" (ngSubmit)="submitApplication()">
+          <div class="form-section">
+            <h3 class="section-title">Personal Information</h3>
+            
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" formControlName="fullName" placeholder="Enter your full name">
+              <div class="error-message" *ngIf="applicationForm.get('fullName')?.invalid && applicationForm.get('fullName')?.touched">
+                Full name is required
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+                <div class="error-message" *ngIf="applicationForm.get('email')?.invalid && applicationForm.get('email')?.touched">
+                  Please enter a valid email address
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" formControlName="phone" placeholder="Enter your phone number">
+                <div class="error-message" *ngIf="applicationForm.get('phone')?.invalid && applicationForm.get('phone')?.touched">
+                  Phone number is required
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3 class="section-title">Professional Information</h3>
+            
+            <div class="form-group">
+              <label for="experience">Years of Experience *</label>
+              <select id="experience" formControlName="experience">
+                <option value="">Select experience</option>
+                <option value="0-1">Less than 1 year</option>
+                <option value="1-3">1-3 years</option>
+                <option value="3-5">3-5 years</option>
+                <option value="5-10">5-10 years</option>
+                <option value="10+">10+ years</option>
+              </select>
+              <div class="error-message" *ngIf="applicationForm.get('experience')?.invalid && applicationForm.get('experience')?.touched">
+                Please select your experience
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="linkedInProfile">LinkedIn Profile</label>
+                <input type="url" id="linkedInProfile" formControlName="linkedInProfile" placeholder="LinkedIn URL (optional)">
+              </div>
+              
+              <div class="form-group">
+                <label for="portfolioUrl">Portfolio/Website</label>
+                <input type="url" id="portfolioUrl" formControlName="portfolioUrl" placeholder="Portfolio URL (optional)">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3 class="section-title">Application Documents</h3>
+            
+            <div class="form-group">
+              <label for="resume">Resume/CV *</label>
+              <div class="file-input-container">
+                <input type="file" id="resume" (change)="onResumeSelected($event)" accept=".pdf,.doc,.docx">
+                <div class="file-input-button">
+                  <span>Choose File</span>
+                </div>
+                <div class="file-name" *ngIf="resumeFileName">{{ resumeFileName }}</div>
+                <div class="file-name" *ngIf="!resumeFileName">No file chosen</div>
+              </div>
+              <div class="error-message" *ngIf="applicationForm.get('resume')?.invalid && applicationForm.get('resume')?.touched">
+                Resume is required
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="coverLetter">Cover Letter (Optional)</label>
+              <div class="file-input-container">
+                <input type="file" id="coverLetter" (change)="onCoverLetterSelected($event)" accept=".pdf,.doc,.docx">
+                <div class="file-input-button">
+                  <span>Choose File</span>
+                </div>
+                <div class="file-name" *ngIf="coverLetterFileName">{{ coverLetterFileName }}</div>
+                <div class="file-name" *ngIf="!coverLetterFileName">No file chosen</div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="additionalInfo">Additional Information</label>
+              <textarea id="additionalInfo" formControlName="additionalInfo" rows="3" placeholder="Any additional information you'd like to share"></textarea>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeModal($event)">Cancel</button>
+            <button type="submit" class="submit-btn">Submit Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

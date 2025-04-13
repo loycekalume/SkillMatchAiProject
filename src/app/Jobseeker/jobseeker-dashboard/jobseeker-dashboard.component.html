@@ -1,7 +1,7 @@
 <body>
     <div class="container">
         <!-- Sidebar -->
-       <app-sidebar></app-sidebar>
+        <app-sidebar></app-sidebar>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -13,7 +13,8 @@
                         <input type="text" placeholder="Search" class="search-input">
                     </div>
                     <div class="profile-image">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="Profile">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40"
+                            alt="Profile">
                     </div>
                 </div>
             </header>
@@ -46,43 +47,27 @@
             <section class="job-matches">
                 <div class="section-header">
                     <h2>Top Job Matches</h2>
-                    <a routerLink="/jobmatches" class="view-all">View All</a>
+                    <a routerLink="/jobseeker/jobmatches" class="view-all">View All</a>
                 </div>
+
                 <div class="job-cards">
-                    <div class="job-card">
+                    <div class="job-card" *ngFor="let job of jobs">
                         <div class="job-header">
-                            <h3 class="job-title">Senior Frontend Engineer</h3>
-                            <div class="match-percentage">95% Match</div>
+                            <h3 class="job-title">{{ job.title }}</h3>
+                            <div class="match-percentage">{{ job.matchPercentage }} Match</div>
                         </div>
                         <div class="job-details">
-                            <span class="job-type">Full-time</span>
-                            <span class="job-location">Remote</span>
+                            <span class="job-type">{{ job.type }}</span>
+                            <span class="job-location">{{ job.location }}</span>
                         </div>
                         <div class="job-skills">
-                            <span class="skill">React</span>
-                            <span class="skill">Js</span>
-                            <span class="skill">Angular</span>
-                            <span class="skill">Express</span>
+                            <span class="skill" *ngFor="let skill of job.skills">{{ skill }}</span>
                         </div>
-                        <button class="apply-btn">Apply Now</button>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h3 class="job-title">Full-stack Developer</h3>
-                            <div class="match-percentage">90% Match</div>
-                        </div>
-                        <div class="job-details">
-                            <span class="job-type">Full-time</span>
-                            <span class="job-location">Remote</span>
-                        </div>
-                        <div class="job-skills">
-                            <span class="skill">React</span>
-                            <span class="skill">Angular</span>
-                            <span class="skill">Express</span>
-                        </div>
-                        <button class="apply-btn">Apply Now</button>
+                        <button class="apply-btn" (click)="openApplicationModal(job)">Apply Now</button>
                     </div>
                 </div>
+
+
             </section>
 
             <!-- Two Column Layout for Interviews and AI Assistant -->
@@ -130,7 +115,8 @@
                                     <p class="message-text">Update my job matches</p>
                                 </div>
                                 <div class="message bot">
-                                    <p class="message-text">I cannot update job matches as I don't have access to your profile data.</p>
+                                    <p class="message-text">I cannot update job matches as I don't have access to your
+                                        profile data.</p>
                                 </div>
                             </div>
                             <div class="chat-input">
@@ -142,4 +128,8 @@
             </div>
         </main>
     </div>
+    <app-applicationmodal [isVisible]="showApplicationModal" [jobTitle]="selectedJob?.title || ''"
+        [companyName]="selectedJob?.company || ''" [jobSkills]="selectedJob?.skills || []"
+        (close)="closeApplicationModal()" (submit)="handleApplicationSubmit($event)">
+    </app-applicationmodal>
 </body>
