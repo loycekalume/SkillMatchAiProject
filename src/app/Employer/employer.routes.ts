@@ -1,10 +1,5 @@
 
 import { Routes } from '@angular/router';
-// import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-// import { JobManagementComponent } from './job-management/job-management.component';
-// import { AiAnalysisComponent } from './ai-analysis/ai-analysis.component';
-// import { UserManagementComponent } from './user-management/user-management.component';
-
 import { EmployerDashboardComponent } from "./employer-dashboard/employer-dashboard.component";
 import { JobsPostedComponent } from './jobs-posted/jobs-posted.component';
 import { AiassistantComponent } from './aiassistant/aiassistant.component';

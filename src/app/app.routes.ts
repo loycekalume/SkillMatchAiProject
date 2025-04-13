@@ -20,27 +20,33 @@ export const routes: Routes = [
         },
     },
     // {
-    //     path: 'employer-dashboard',
+    //     path: 'performance',
     //     loadComponent() {
-    //         return import('./Employer/employer-dashboard/employer-dashboard.component').then(({ EmployerDashboardComponent }) => EmployerDashboardComponent);
+    //         return import('./admin/performance/performance.component').then(({ PerformanceComponent }) => PerformanceComponent);
     //     },
     // },
     // {
-    //     path: 'jobsposted',
+    //     path: 'ai-analysis',
     //     loadComponent() {
-    //         return import('./Employer/jobs-posted/jobs-posted.component').then(({ JobsPostedComponent }) => JobsPostedComponent);
+    //         return import('./admin/ai-analysis/ai-analysis.component').then(({ AiAnalysisComponent }) => AiAnalysisComponent);
     //     },
     // },
     // {
-    //     path: 'interviews',
+    //     path: 'usermanagement',
     //     loadComponent() {
-    //         return import('./Employer/employer-interviews/employer-interviews.component').then(({  EmployerInterviewsComponent }) =>  EmployerInterviewsComponent);
+    //         return import('./admin/user-management/user-management.component').then(({  UserManagementComponent }) =>   UserManagementComponent );
     //     },
     // },
     // {
-    //     path: 'applications',
+    //     path: 'jobmanagement',
     //     loadComponent() {
-    //         return import('./Employer/applications/applications.component').then(({  ApplicationsComponent }) =>  ApplicationsComponent);
+    //         return import('./admin/job-management/job-management.component').then(({  JobManagementComponent }) =>   JobManagementComponent );
+    //     },
+    // },
+    // {
+    //     path: 'admin',
+    //     loadComponent() {
+    //         return import('./admin/admin-dashboard/admin-dashboard.component').then(({  AdminDashboardComponent  }) =>  AdminDashboardComponent );
     //     },
     // },
     {
