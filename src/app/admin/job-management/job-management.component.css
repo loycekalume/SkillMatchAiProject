@@ -1,193 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body, html {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .dashboard {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
 
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            background-color: #f4f6f8;
-            color: #333;
-        }
-
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            background-color: #2c3e50;
-            color: #fff;
-            width: 250px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar h2 {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            background-color: #34495e;
-        }
-
-        .sidebar .logout {
-            margin-top: auto;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        .jobs-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .jobs-header h1 {
-            margin: 0;
-            color: #333;
-        }
-
-        .search-bar input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .jobs-table-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
-        }
-
-        .jobs-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .jobs-table th, .jobs-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .jobs-table th {
-            background-color: #f8f8f8;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .jobs-table tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .jobs-table .actions {
-            text-align: center;
-        }
-
-        .jobs-table .actions button {
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
-
-        .jobs-table .actions button:hover {
-            background-color: #c0392b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                padding: 15px;
-                margin-bottom: 20px;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
-
-            .sidebar h2 {
-                margin-bottom: 0;
-            }
-
-            .sidebar ul {
-                display: flex;
-                margin-left: auto;
-            }
-
-            .sidebar li {
-                margin-left: 10px;
-                margin-bottom: 0;
-            }
-
-            .sidebar .logout {
-                margin-top: 0;
-            }
-
-            .jobs-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .search-bar {
-                margin-top: 10px;
-            }
-
-            .jobs-table th:nth-child(3), /* Hide Status */
-            .jobs-table td:nth-child(3) {
-                display: none;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .sidebar ul {
-                display: none; /* Hide navigation links on very small screens, consider a toggle */
-            }
-
-            .sidebar {
-                justify-content: center;
-            }
-
-            .sidebar h2 {
-                font-size: 1.5em;
-            }
-
-            .jobs-table th:nth-child(2), /* Hide Company */
-            .jobs-table td:nth-child(2) {
-                display: none;
-            }
-        }
+  
+  /* Main Content */
+  .main-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+    height: 100vh;
+    overflow-y: auto;
+    background: #f9f9fb;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  header h1 {
+    font-size: 22px;
+    color: #333;
+  }
+  
+  header input {
+    padding: 8px 12px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* User Table Section */
+  .user-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .table {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .table button {
+    margin-right: 6px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6a5acd;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+.status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .status.active {
+    background-color: #e0f5e9;
+    color: #2e8b57;
+  }
+  
+  .status.pending {
+    background-color: #fff4e5;
+    color: #d2691e;
+  }
+  

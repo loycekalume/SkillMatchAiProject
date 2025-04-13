@@ -1,0 +1,162 @@
+<body>
+   <app-sidebar></app-sidebar>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>System Performance</h1>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="cards-grid">
+            <div class="card">
+                <h3 class="card-title">CPU Usage</h3>
+                <div class="card-value">42%</div>
+                <div class="card-subtitle green">Normal</div>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Memory Usage</h3>
+                <div class="card-value">68%</div>
+                <div class="card-subtitle orange">Moderate</div>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Response Time</h3>
+                <div class="card-value">235ms</div>
+                <div class="card-subtitle blue">-15ms from last week</div>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Uptime</h3>
+                <div class="card-value">99.98%</div>
+                <div class="card-subtitle green">Last 30 days</div>
+            </div>
+        </div>
+
+        <!-- Resource Usage Chart -->
+        <div class="chart-container">
+            <h3 class="chart-title">Resource Usage (Last 24 Hours)</h3>
+            <div class="line-chart">
+                <div class="chart-line line-25"></div>
+                <div class="chart-line line-50"></div>
+                <div class="chart-line line-75"></div>
+                
+                <div class="chart-label label-0">0%</div>
+                <div class="chart-label label-25">25%</div>
+                <div class="chart-label label-50">50%</div>
+                <div class="chart-label label-75">75%</div>
+                <div class="chart-label label-100">100%</div>
+                
+                <div class="cpu-line"></div>
+                <div class="memory-line"></div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 15px;">
+                <div style="display: flex; align-items: center; margin-right: 20px;">
+                    <div style="width: 12px; height: 12px; background-color: #9333ea; border-radius: 2px; margin-right: 5px;"></div>
+                    <span style="font-size: 14px;">CPU Usage</span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 12px; height: 12px; background-color: #3b82f6; border-radius: 2px; margin-right: 5px;"></div>
+                    <span style="font-size: 14px;">Memory Usage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Charts -->
+        <div class="charts-grid">
+            <!-- Server Status -->
+            <div class="chart-container">
+                <h3 class="chart-title">Server Status</h3>
+                <div class="server-status">
+                    <div class="status-indicator online"></div>
+                    <div class="server-name">Production Server</div>
+                    <div class="server-metric">CPU: 38%</div>
+                    <div class="server-metric">Memory: 62%</div>
+                    <div class="server-metric">Load: 0.75</div>
+                </div>
+                <div class="server-status">
+                    <div class="status-indicator online"></div>
+                    <div class="server-name">Staging Server</div>
+                    <div class="server-metric">CPU: 22%</div>
+                    <div class="server-metric">Memory: 45%</div>
+                    <div class="server-metric">Load: 0.32</div>
+                </div>
+                <div class="server-status">
+                    <div class="status-indicator warning"></div>
+                    <div class="server-name">Database Server</div>
+                    <div class="server-metric">CPU: 72%</div>
+                    <div class="server-metric">Memory: 85%</div>
+                    <div class="server-metric">Load: 1.25</div>
+                </div>
+                <div class="server-status">
+                    <div class="status-indicator online"></div>
+                    <div class="server-name">Cache Server</div>
+                    <div class="server-metric">CPU: 18%</div>
+                    <div class="server-metric">Memory: 56%</div>
+                    <div class="server-metric">Load: 0.28</div>
+                </div>
+                <div class="server-status">
+                    <div class="status-indicator offline"></div>
+                    <div class="server-name">Backup Server</div>
+                    <div class="server-metric">Scheduled Maintenance</div>
+                </div>
+            </div>
+
+            <!-- Resource Allocation -->
+            <div class="chart-container">
+                <h3 class="chart-title">Resource Allocation</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Web Services</span>
+                        <span>35%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill purple" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Database</span>
+                        <span>28%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill blue" style="width: 28%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>AI Processing</span>
+                        <span>22%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill green" style="width: 22%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>File Storage</span>
+                        <span>10%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill orange" style="width: 10%;"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Other Services</span>
+                        <span>5%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill red" style="width: 5%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    
+</body>

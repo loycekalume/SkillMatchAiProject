@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { JobManagementComponent } from './job-management/job-management.component';
 import { AiAnalysisComponent } from './ai-analysis/ai-analysis.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { PerformanceComponent } from './performance/performance.component';
 
 
 export const ADMIN_ROUTES: Routes = [
@@ -12,5 +13,5 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'jobmanagement', component:JobManagementComponent },
   { path: 'ai-analysis', component: AiAnalysisComponent},
   { path: 'usermanagement', component: UserManagementComponent },
-  
+  { path: 'performance', component: PerformanceComponent },
 ];

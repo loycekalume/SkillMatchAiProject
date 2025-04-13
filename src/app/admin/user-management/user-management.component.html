@@ -1,51 +1,28 @@
 <body>
-    <div class="container">
-       <app-sidebar></app-sidebar>
-        <main class="main-content">
-            <div class="users-header">
-                <h1>Manage Users</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search Users...">
-                </div>
-            </div>
-
-            <div class="users-table-container">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th class="actions">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Josh Smith</td>
-                            <td>admin</td>
-                            <td class="actions">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Del</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Loyce Kalume</td>
-                            <td>jobseeker</td>
-                            <td class="actions">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Del</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carol Mwangi</td>
-                            <td>employer</td>
-                            <td class="actions">
-                                <button class="edit-btn">Edit</button>
-                                <button class="delete-btn">Del</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+    <div class="dashboard">
+     <app-sidebar></app-sidebar>
+  
+      <main class="main-content">
+        <header>
+          <h1>Users</h1>
+          <input type="text" placeholder="Search" />
+        </header>
+  
+        <section class="user-section">
+          <h2>Manage Users</h2>
+          <div class="table">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Role</th><th>Actions</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Josh Smith</td><td>admin</td><td><button>Edit</button> <button>Del</button></td></tr>
+                <tr><td>Loyce Kalume</td><td>jobseeker</td><td><button>Edit</button> <button>Del</button></td></tr>
+                <tr><td>Carol Mwangi</td><td>employer</td><td><button>Edit</button> <button>Del</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
     </div>
-</body>
+  </body>

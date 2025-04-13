@@ -1,36 +1,114 @@
 <body>
-    <div class="container">
-        <app-sidebar></app-sidebar> 
-        <main class="main-content">
-            <div class="dashboard-header">
-                <h1>Dashboard</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                </div>
-            </div>
+  <app-sidebar></app-sidebar>
 
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <h3>AI Accuracy</h3>
-                    <div class="value">85.5%</div>
-                    <div class="description">-2% last month</div>
-                </div>
-                <div class="overview-card">
-                    <h3>AI Models</h3>
-                    <div class="value">8</div>
-                    <div class="description">1 needs attention</div>
-                </div>
-                <div class="overview-card">
-                    <h3>User Ratings</h3>
-                    <div class="value">7.5 / 10</div>
-                    <div class="description">works well for most</div>
-                </div>
-            </div>
+  <!-- Main Content -->
+  <div class="main-content">
+      <div class="header">
+          <h1>AI Analysis</h1>
+          <div class="search-container">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="search-input" placeholder="Search">
+          </div>
+      </div>
 
-            <div class="accuracy-trend">
-                <h2>Accuracy Trends (Last 12 Months)</h2>
-                <img src="placeholder_chart.png" alt="Accuracy Trend Chart">
-                </div>
-        </main>
-    </div>
+      <!-- Metrics Cards -->
+      <div class="cards-grid">
+          <div class="card">
+              <h3 class="card-title">AI Accuracy</h3>
+              <div class="card-value">85.6%</div>
+              <div class="card-subtitle">+2 from last month</div>
+          </div>
+          <div class="card">
+              <h3 class="card-title">AI Models</h3>
+              <div class="card-value">6</div>
+              <div class="card-subtitle green">5 in use</div>
+              <div class="card-subtitle red">1 needs attention</div>
+          </div>
+          <div class="card">
+              <h3 class="card-title">User Ratings</h3>
+              <div class="card-value">7.5/10</div>
+              <div class="card-subtitle blue">works well for most users</div>
+          </div>
+      </div>
+
+      <!-- Accuracy Trends Chart -->
+      <div class="chart-container">
+          <h3 class="chart-title">Accuracy Trends (Last 12 Months)</h3>
+          <div class="bar-chart">
+              <div class="bar" style="height: 78%;">
+                  <div class="bar-label">May</div>
+              </div>
+              <div class="bar" style="height: 82%;">
+                  <div class="bar-label">Jun</div>
+              </div>
+              <div class="bar" style="height: 79%;">
+                  <div class="bar-label">Jul</div>
+              </div>
+              <div class="bar" style="height: 81%;">
+                  <div class="bar-label">Aug</div>
+              </div>
+              <div class="bar" style="height: 83%;">
+                  <div class="bar-label">Sep</div>
+              </div>
+              <div class="bar" style="height: 82%;">
+                  <div class="bar-label">Oct</div>
+              </div>
+              <div class="bar" style="height: 84%;">
+                  <div class="bar-label">Nov</div>
+              </div>
+              <div class="bar" style="height: 83%;">
+                  <div class="bar-label">Dec</div>
+              </div>
+              <div class="bar" style="height: 84%;">
+                  <div class="bar-label">Jan</div>
+              </div>
+              <div class="bar" style="height: 85%;">
+                  <div class="bar-label">Feb</div>
+              </div>
+              <div class="bar" style="height: 86%;">
+                  <div class="bar-label">Mar</div>
+              </div>
+              <div class="bar" style="height: 85.6%;">
+                  <div class="bar-label">Apr</div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Additional Charts -->
+      <div class="charts-grid">
+          <!-- User Satisfaction Chart -->
+          <div class="chart-container">
+              <h3 class="chart-title">User Satisfaction Distribution</h3>
+              <div class="pie-chart"></div>
+              <div class="pie-legend">
+                  <div class="legend-item">
+                      <div class="legend-color" style="background-color: #9333ea;"></div>
+                      <span>Very Satisfied (45%)</span>
+                  </div>
+                  <div class="legend-item">
+                      <div class="legend-color" style="background-color: #a855f7;"></div>
+                      <span>Satisfied (30%)</span>
+                  </div>
+                  <div class="legend-item">
+                      <div class="legend-color" style="background-color: #c084fc;"></div>
+                      <span>Neutral (15%)</span>
+                  </div>
+                  <div class="legend-item">
+                      <div class="legend-color" style="background-color: #d8b4fe;"></div>
+                      <span>Dissatisfied (7%)</span>
+                  </div>
+                  <div class="legend-item">
+                      <div class="legend-color" style="background-color: #e9d5ff;"></div>
+                      <span>Very Dissatisfied (3%)</span>
+                  </div>
+              </div>
+          </div>
+
+          
+      </div>
+
+     
+  </div>
+
+  
 </body>
