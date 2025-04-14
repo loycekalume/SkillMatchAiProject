@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
   standalone: true,
   imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrls: ['./sign-up.component.css', '../home/home.component.css', '../login/login.component.css'],
 })
 export class SignUpComponent implements OnInit {
   currentStep = 1;
