@@ -1,89 +1,63 @@
-<body>
-    <div class="containers">
-        <!-- Sidebar -->
-      <app-sidebar></app-sidebar>
-        <!-- Main Content -->
-        <main class="main-contents">
-            <header class="heading">
-                <h1 class="welcome-text">Welcome Loyce</h1>
-                <div class="search-profile">
-                    <div class="search-container">
-                        <input type="text" placeholder="Search" class="search-input">
-                    </div>
-                    <div class="profile-image">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="Profile">
-                    </div>
-                </div>
-            </header>
+<div class="containers">
+    <app-sidebar></app-sidebar>
+    <main class="main-contents">
+      <header class="heading">
+        <h1 class="welcome-text">Welcome Loyce</h1>
+        <div class="search-profile">
+          <app-search (searchEvent)="onSearch($event)"></app-search>
+          <div class="profile-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40" alt="Profile">
+          </div>
+        </div>
+      </header>
 
-            <!-- Overview Cards -->
-            <section class="overview-cards">
-                <div class="card">
-                    <h3 class="card-title">Upcoming Interviews</h3>
-                    <div class="card-value">1</div>
-                    <div class="card-subtitle">Tomorrow</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Applied Jobs</h3>
-                    <div class="card-value">1</div>
-                    <div class="card-subtitle">This week</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Profile strength</h3>
-                    <div class="card-value">85%</div>
-                    <div class="card-subtitle">Enhance your profile to get noticed</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Messages</h3>
-                    <div class="card-value">3</div>
-                    <div class="card-subtitle">Unread messages from recruiters</div>
-                </div>
-            </section>
+      <!-- Overview Cards -->
+      <section class="overview-cards">
+        <div class="card" *ngFor="let card of overviewCards">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <div class="card-value">{{ card.value }}</div>
+          <div class="card-subtitle">{{ card.subtitle }}</div>
+        </div>
+      </section>
 
-            <!-- Interviews Section -->
-            <section class="interviews-section">
-                <div class="section-header">
-                    <h2 class="section-title">View Interviews</h2>
-                </div>
-                <div class="interviews-table-container">
-                    <table class="interviews-table">
-                        <thead>
-                            <tr>
-                                <th>Job title</th>
-                                <th>Company</th>
-                                <th>Time and Date</th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Senior Frontend Engineer</td>
-                                <td>TechCorp</td>
-                                <td>
-                                    <div>March 15</div>
-                                    <div>10:00 AM - 11:00 AM</div>
-                                </td>
-                                <td><span class="status-badge active">Active</span></td>
-                                <td>Video</td>
-                                <td><button class="join-btn">Join</button></td>
-                            </tr>
-                            <tr>
-                                <td>Frontend Developer</td>
-                                <td>The Jitu</td>
-                                <td>
-                                    <div>April 10</div>
-                                    <div>10:00 AM - 11:00 AM</div>
-                                </td>
-                                <td><span class="status-badge pending">Pending</span></td>
-                                <td>Video</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
-    </div>
-</body>
+      <!-- Interviews Section -->
+      <section class="interviews-section">
+        <div class="section-header">
+          <h2 class="section-title">View Interviews</h2>
+        </div>
+        <div class="interviews-table-container">
+          <table class="interviews-table">
+            <thead>
+              <tr>
+                <th>Job title</th>
+                <th>Company</th>
+                <th>Time and Date</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let interview of filteredInterviews">
+                <td>{{ interview.jobTitle }}</td>
+                <td>{{ interview.company }}</td>
+                <td>
+                  <div>{{ interview.date }}</div>
+                  <div>{{ interview.time }}</div>
+                </td>
+                <td>
+                  <span class="status-badge" [ngClass]="interview.status">
+                    {{ interview.status | titlecase }}
+                  </span>
+                </td>
+                <td>{{ interview.type }}</td>
+                <td>
+                  <button class="join-btn" *ngIf="interview.status === 'active'">Join</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
