@@ -13,9 +13,9 @@ export class SidebarComponent {
   menuItems = [
     { link: '/employer/dashboard', icon: 'fas fa-home', text: 'Dashboard', active: true },
     { link: '/employer/jobsposted', icon: 'fas fa-briefcase', text: 'Jobs Posted', active: false },
-    { link: '/employer/ai-assistant', icon: 'fas fa-file-alt', text: 'AI Assistant', active: false },
+    { link: '/employer/ai-assistant', icon: 'fas fa-brain', text: 'AI Assistant', active: false },
     { link: '/employer/interviews', icon: 'fas fa-user', text: 'Interviews', active: false },
-    { link: '/employer/candidates', icon: 'fas fa-user', text: 'Candindates', active: false },
+    { link: '/employer/candidates', icon: 'fas fa-users', text: 'Candindates', active: false },
     { link: '/employer/applications', icon: 'fas fa-user', text: 'Applications', active: false },
     
   ];
