@@ -35,11 +35,10 @@ export class LoginComponent implements OnInit {
       
       console.log('Login attempt:', email);
       
-      // In a real application, you would authenticate against your backend
-      // For now, we'll simulate authentication and role determination
+      
       this.authenticateUser(email, password);
     } else {
-      // Mark form controls as touched to display validation errors
+     
       Object.keys(this.loginForm.controls).forEach(key => {
         this.loginForm.get(key)?.markAsTouched();
       });
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
   }
   
   private authenticateUser(email: string, password: string): void {
-    // Simulate API call with a small delay
     console.log('Authenticating user...');
     
     setTimeout(() => {
@@ -89,7 +87,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/jobseeker']);
         break;
       default:
-        // Fallback to home page if role is unknown
+       
         this.router.navigate(['']);
         break;
     }

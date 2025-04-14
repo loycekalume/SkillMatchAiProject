@@ -11,8 +11,8 @@
         </div>
         <nav class="main-nav">
           <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a routerLink="/features" routerLinkActive="active">Features</a></li>
+            <li><a routerLink="/howitworks" routerLinkActive="active">How It Works</a></li>
            
           </ul>
         </nav>
@@ -35,7 +35,7 @@
           <h1>Match Skills, Not Just Titles</h1>
           <p>SkillMatch AI revolutionizes hiring by focusing on what really matters - your skills and potential. Our AI-powered platform connects talent with opportunities based on capabilities, not keywords!.</p>
           <div class="hero-buttons">
-            <a href="signup.html" class="btn btn-primary btn-lg">Get Started</a>
+            <a routerLink="/signUp" class="btn btn-primary btn-lg">Get Started</a>
             <a href="#demo" class="btn btn-secondary btn-lg">Watch Demo</a>
           </div>
         </div>
@@ -86,109 +86,122 @@
       </div>
     </div>
   </section>
-
-  <!-- Features Section -->
-  <section class="features" id="features">
+  
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-header">
-        <h2>Platform Features</h2>
-        <p>SkillMatch AI offers powerful features for job seekers, employers, and administrators to streamline the hiring process.</p>
+        <h2>Success Stories</h2>
+        <p>See how SkillMatch AI is transforming careers and hiring processes.</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-user-tie"></i>
+      <div class="testimonial-slider">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>SkillMatch AI helped me find a job that perfectly matches my skills, even though my background was non-traditional.</p>
           </div>
-          <h3>For Job Seekers</h3>
-          <p>Create detailed skill profiles, update portfolios, and receive AI-matched job recommendations based on your actual abilities.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-building"></i>
+          <div class="testimonial-author">
+            <img src="/placeholder.svg?height=60&width=60" alt="Sarah Johnson">
+            <div class="author-info">
+              <h4>Sarah Johnson</h4>
+              <p>Frontend Developer, TechCorp</p>
+            </div>
           </div>
-          <h3>For Employers</h3>
-          <p>Post jobs with required skills and review AI-matched candidates that truly fit your needs, saving time and resources.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-brain"></i>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>We've reduced our hiring time by 60% and found candidates with exactly the skills we need using this platform.</p>
           </div>
-          <h3>AI-Driven Matching</h3>
-          <p>Our advanced algorithms analyze skills, experience, and potential to create perfect matches beyond what traditional methods can achieve.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-comments"></i>
+          <div class="testimonial-author">
+            <img src="/placeholder.svg?height=60&width=60" alt="Michael Chen">
+            <div class="author-info">
+              <h4>Michael Chen</h4>
+              <p>HR Director, InnovateTech</p>
+            </div>
           </div>
-          <h3>AI Chat Assistant</h3>
-          <p>Recruiters can query the candidate database using natural language to find the perfect match for their requirements.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-calendar-alt"></i>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>The AI-driven matching is incredibly accurate. I've hired three team members through SkillMatch and all have been perfect fits.</p>
           </div>
-          <h3>Interview Management</h3>
-          <p>Schedule and manage interviews with automated notifications and reminders for a seamless hiring process.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
+          <div class="testimonial-author">
+            <img src="/placeholder.svg?height=60&width=60" alt="Jessica Williams">
+            <div class="author-info">
+              <h4>Jessica Williams</h4>
+              <p>CTO, StartupX</p>
+            </div>
           </div>
-          <h3>Career Insights</h3>
-          <p>Get AI-recommended career paths based on your skills, industry trends, and potential growth opportunities.</p>
         </div>
+      </div>
+      <div class="testimonial-controls">
+        <button class="testimonial-prev"><i class="fas fa-arrow-left"></i></button>
+        <div class="testimonial-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="testimonial-next"><i class="fas fa-arrow-right"></i></button>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="how-it-works" id="how-it-works">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <div class="section-header">
-        <h2>How It Works</h2>
-        <p>Our AI-powered platform makes finding the perfect match simple and efficient.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <!-- <img src="/placeholder.svg?height=40&width=40" alt="SkillMatch AI Logo"> -->
+            <h2>SkillMatch AI</h2>
+          </div>
+          <p>Revolutionizing hiring through AI-powered skill matching.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Guides</a></li>
+            <li><a href="#">API Documentation</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">GDPR</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h3>Stay Updated</h3>
+          <p>Subscribe to our newsletter for the latest updates.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Create Your Profile</h3>
-            <p>Job seekers build detailed skill profiles, while employers create job postings with specific skill requirements.</p>
-          </div>
-          <div class="step-image">
-            <!-- <img src="/placeholder.svg?height=200&width=300" alt="Create Profile"> -->
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>AI Matching</h3>
-            <p>Our advanced AI analyzes profiles and job requirements to find the perfect matches based on skills, experience, and potential.</p>
-          </div>
-          <div class="step-image">
-            <!-- <img src="/placeholder.svg?height=200&width=300" alt="AI Matching"> -->
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Connect & Interview</h3>
-            <p>Review matches, connect with potential candidates or employers, and schedule interviews through our platform.</p>
-          </div>
-          <div class="step-image">
-            <!-- <img src="/placeholder.svg?height=200&width=300" alt="Connect and Interview"> -->
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>Hire & Grow</h3>
-            <p>Complete the hiring process and continue to grow your career or team with SkillMatch AI's ongoing support.</p>
-          </div>
-          <div class="step-image">
-            <!-- <img src="/placeholder.svg?height=200&width=300" alt="Hire and Grow"> -->
-          </div>
-        </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SkillMatch AI. All rights reserved.</p>
       </div>
     </div>
-  </section>
+  </footer>
