@@ -1,106 +1,149 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
 
-<body>
-  <div class="layout">
-    <app-sidebar></app-sidebar>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <div class="container">
-        <div class="headers">
-          <div class="header-left">
-            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
-              <i class="fas fa-bars"></i>
-            </button>
-            <h1>All Job Matches</h1>
-          </div>
-          <p class="matches-count">Showing 24 matches based on your profile</p>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="headers">
+        <div class="header-left">
+          <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1>All Job Matches</h1>
         </div>
+        <p class="matches-count">Showing {{ jobs.length }} matches based on your profile</p>
+      </div>
 
-        <div class="search-filter-section">
-          <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Search job titles, skills, or companies">
-          </div>
-          
-          <div class="filter-sort">
-            <button class="filter-button">
-              <i class="fas fa-filter"></i>
-              Filters
-            </button>
-            
-            <div class="sort-dropdown">
-              <select>
-                <option value="match">Match Percentage</option>
-                <option value="recent">Most Recent</option>
-                <option value="salary">Salary</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="active-filters">
-          <div class="filter-header">
-            <h3>Active Filters:</h3>
-          </div>
-          <div class="filter-badges">
-            <span class="badge">
-              Remote
-              <button class="remove-filter">×</button>
-            </span>
-            <span class="badge">
-              Full-time
-              <button class="remove-filter">×</button>
-            </span>
-            <span class="badge">
-              React
-              <button class="remove-filter">×</button>
-            </span>
-            <button class="clear-all">Clear All</button>
-          </div>
-        </div>
-
-        <div class="job-grid">
-          <div class="job-card" *ngFor="let job of jobs">
-            <div class="job-header">
-              <h2 class="job-title">{{ job.title }}</h2>
-              <div class="company-name">{{ job.company }}</div>
-              <div class="job-details">
-                <span>{{ job.type }}</span>
-                <span class="separator">•</span>
-                <span>{{ job.location }}</span>
-              </div>
-            </div>
-            <div class="job-content">
-              <div class="skills">
-                <span class="skill-badge" *ngFor="let skill of job.skills">{{ skill }}</span>
-              </div>
-              <div class="match-container">
-                <div class="match-percentage">{{ job.matchPercentage }} Match</div>
-                <div class="progress-bar">
-                  <div class="progress" [style.width]="job.matchPercentage"></div>
-                </div>
-              </div>
-            </div>
-            <div class="job-footer">
-              <button class="apply-button" (click)="openApplicationModal(job)">Apply Now</button>
-            </div>
-          </div>
+      <div class="search-filter-section">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search job titles, skills, or companies"
+            [(ngModel)]="searchText"
+            (keyup.enter)="onSearch()"
+          >
+          <button 
+          *ngIf="searchText" 
+          class="clear-search" 
+          (click)="clearSearch()">
+          ×
+        </button>
         </div>
         
-
-        <div class="pagination">
-          <button class="page-button" disabled>&lt;</button>
-          <button class="page-button active">1</button>
-          <button class="page-button">2</button>
-          <button class="page-button">3</button>
-          <button class="page-button">4</button>
-          <button class="page-button">&gt;</button>
+        <div class="filter-sort">
+          <button class="filter-button" (click)="toggleFilterModal()">
+            <i class="fas fa-filter"></i>
+            Filters
+          </button>
+          
+          <div class="sort-dropdown">
+            <select [(ngModel)]="sortOption" (change)="onSortChange($event)">
+              <option value="match">Match Percentage</option>
+              <option value="recent">Most Recent</option>
+              <option value="salary">Salary</option>
+            </select>
+          </div>
         </div>
       </div>
-    </main>
-  </div>
 
-  <app-applicationmodal 
+      <div class="active-filters" *ngIf="activeFilters.length > 0">
+        <div class="filter-header">
+          <h3>Active Filters:</h3>
+        </div>
+        <div class="filter-badges">
+          <span class="badge" *ngFor="let filter of activeFilters">
+            {{ filter }}
+            <button class="remove-filter" (click)="removeFilter(filter)">×</button>
+          </span>
+          <button class="clear-all" (click)="clearAllFilters()">Clear All</button>
+        </div>
+      </div>
+
+      <div class="job-grid">
+        <div class="job-card" *ngFor="let job of jobs">
+          <div class="job-header">
+            <h2 class="job-title">{{ job.title }}</h2>
+            <div class="company-name">{{ job.company }}</div>
+            <div class="job-details">
+              <span>{{ job.type }}</span>
+              <span class="separator">•</span>
+              <span>{{ job.location }}</span>
+            </div>
+          </div>
+          <div class="job-content">
+            <div class="skills">
+              <span class="skill-badge" *ngFor="let skill of job.skills">{{ skill }}</span>
+            </div>
+            <div class="match-container">
+              <div class="match-percentage">{{ job.matchPercentage }} Match</div>
+              <div class="progress-bar">
+                <div class="progress" [style.width]="job.matchPercentage"></div>
+              </div>
+            </div>
+          </div>
+          <div class="job-footer">
+            <button class="apply-button" (click)="openApplicationModal(job)">Apply Now</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- No results message -->
+      <div class="no-results" *ngIf="jobs.length === 0">
+        <i class="fas fa-search"></i>
+        <h3>No matching jobs found</h3>
+        <p>Try adjusting your search or filters to find more opportunities</p>
+        <button class="btn-reset" (click)="clearAllFilters(); searchText = ''; applyFilters()">Reset All Filters</button>
+      </div>
+
+      <div class="pagination" *ngIf="jobs.length > 0">
+        <button class="page-button" disabled>&lt;</button>
+        <button class="page-button active">1</button>
+        <button class="page-button">2</button>
+        <button class="page-button">3</button>
+        <button class="page-button">4</button>
+        <button class="page-button">&gt;</button>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Filter Modal -->
+  <div class="filter-modal-overlay" *ngIf="showFilterModal" (click)="showFilterModal = false">
+    <div class="filter-modal" (click)="$event.stopPropagation()">
+      <div class="filter-modal-header">
+        <h2>Filter Jobs</h2>
+        <button class="close-modal" (click)="showFilterModal = false">×</button>
+      </div>
+      
+      <div class="filter-modal-content">
+        <div class="filter-section" *ngFor="let filterOption of filterOptions">
+          <h3>{{ filterOption.category }}</h3>
+          <div class="filter-options">
+            <div 
+              class="filter-option" 
+              *ngFor="let option of filterOption.options"
+              [class.selected]="isFilterSelected(filterOption.category, option)"
+              (click)="toggleFilter(filterOption.category, option)"
+            >
+              <span class="checkbox">
+                <i class="fas fa-check" *ngIf="isFilterSelected(filterOption.category, option)"></i>
+              </span>
+              {{ option }}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="filter-modal-footer">
+        <button class="btn-cancel" (click)="showFilterModal = false">Cancel</button>
+        <button class="btn-apply" (click)="applyModalFilters()">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-applicationmodal 
   [isVisible]="showApplicationModal" 
   [jobTitle]="selectedJob?.title || ''" 
   [companyName]="selectedJob?.company || ''" 
@@ -108,5 +151,3 @@
   (close)="closeApplicationModal()" 
   (submit)="handleApplicationSubmit($event)">
 </app-applicationmodal>
-
-</body>
