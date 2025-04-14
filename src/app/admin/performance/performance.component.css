@@ -19,7 +19,7 @@ body {
     padding: 20px;
 }
 
-.header {
+.headers {
     display: flex;
     justify-content: space-between;
     align-items: center;
