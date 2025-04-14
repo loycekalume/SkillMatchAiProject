@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userRole', userRole);
       localStorage.setItem('isLoggedIn', 'true');
       
-      console.log(`User authenticated as: ${userRole}`);
+      console.log(`User authenticated as:${userRole}`);
       
       // Redirect based on user role
       this.redirectBasedOnRole(userRole);
@@ -92,4 +92,6 @@ export class LoginComponent implements OnInit {
         break;
     }
   }
-}
+} 
+
+

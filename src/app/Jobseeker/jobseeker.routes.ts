@@ -8,6 +8,7 @@ import { AiassistantComponent } from './aiassistant/aiassistant.component';
 import { JobmatchesComponent } from './jobmatches/jobmatches.component';
 
 
+
 export const JOBSEEKER_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: JobseekerDashboardComponent },

@@ -89,17 +89,20 @@ export class SignUpComponent implements OnInit {
       return stepOneControls.every(control => 
         this.signupForm.get(control)?.valid || false);
     }
-    return true; // For simplicity, other steps don't have validation in this example
+    return true; 
   }
 
-  onSubmit(): void {
+  onSubmit(event?: Event): void {
+    
+    if (event) {
+      event.preventDefault();
+    }
+    
     if (this.signupForm.valid) {
       console.log('Form submitted:', this.signupForm.value);
-      
-      
       this.simulateRegistrationAndRedirect();
     } else {
-      // Mark all fields as touched to trigger validation messages
+      
       Object.keys(this.signupForm.controls).forEach(key => {
         const control = this.signupForm.get(key);
         control?.markAsTouched();
@@ -107,21 +110,26 @@ export class SignUpComponent implements OnInit {
     }
   }
   
-  // This method simulates a registration process
   private simulateRegistrationAndRedirect(): void {
-    // Simulate API call delay (1 second)
-    console.log(`Creating ${this.accountType} account...`);
+    const formData = this.signupForm.value;
+    const userData = this.prepareUserData();
+  
+   
+    localStorage.setItem(formData.email, JSON.stringify(userData));
+    
+    localStorage.setItem('userType', this.accountType);
+  
+    console.log(`${this.accountType} account created successfully!`);
+  
     
     setTimeout(() => {
-      // Log success message
-      console.log(`${this.accountType} account created successfully!`);
-      
-      // Save user type to localStorage (optional)
-      localStorage.setItem('userType', this.accountType);
-      
-      // Redirect to home page
-      this.router.navigate(['/']);
-    }, 1000);
+      console.log('Redirecting to login page...');
+      this.router.navigate(['/login']).then(success => {
+        console.log('Navigation result:', success);
+      }).catch(error => {
+        console.error('Navigation error:', error);
+      });
+    }, 100);
   }
   
   private prepareUserData() {
