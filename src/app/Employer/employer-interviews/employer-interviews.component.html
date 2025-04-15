@@ -1,63 +1,105 @@
 <div class="container">
-    <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
   
-    <div class="main-content">
-      <div class="headers">
-        <h2>Interviews</h2>
-        <button class="search-btn">Search</button>
+  <div class="main-content">
+    <div class="headers">
+      <h2>Interviews</h2>
+      <div class="search-container">
+        <input 
+          *ngIf="showSearchInput" 
+          type="text" 
+          class="search-input" 
+          placeholder="Search interviews..." 
+          [(ngModel)]="searchTerm"
+          (input)="applySearch()"
+        >
+        <button class="search-btn" (click)="toggleSearch()">
+          <i class="fas fa-search"></i>
+          <span *ngIf="!showSearchInput">Search</span>
+          <span *ngIf="showSearchInput">Close</span>
+        </button>
       </div>
-  
-      <p class="description">Manage, review and schedule interviews</p>
-  
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date and Time</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Loyce Kalume</td>
-              <td>Software Dev</td>
-              <td>Video</td>
-              <td class="status scheduled">scheduled</td>
-              <td>25, Apr 10:00AM</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Grace Kalume</td>
-              <td>Graphic Designer</td>
-              <td>Physical</td>
-              <td class="status done">done</td>
-              <td>25, Mar 4:00PM</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Anthony Tial</td>
-              <td>Quality Assurance</td>
-              <td>Video</td>
-              <td class="status new">new</td>
-              <td>25, Apr 10:00AM</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+
+    <p class="description">Manage, review and schedule interviews</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Date and Time</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let interview of interviews">
+            <td>{{ interview.name }}</td>
+            <td>{{ interview.position }}</td>
+            <td>{{ interview.type }}</td>
+            <td class="status {{ interview.status }}">{{ interview.status }}</td>
+            <td>{{ interview.dateTime }}</td>
+            <td>
+              <button class="edit" (click)="openEditModal(interview)">Edit</button>
+              <button class="delete" (click)="deleteInterview(interview.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- No results message -->
+      <div class="no-results" *ngIf="interviews.length === 0">
+        <p>No interviews found. Try adjusting your search criteria.</p>
       </div>
     </div>
   </div>
   
+  <!-- Edit Modal -->
+  <div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Edit Interview</h2>
+        <button class="close-btn" (click)="closeEditModal()">×</button>
+      </div>
+      
+      <div class="modal-body" *ngIf="selectedInterview">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" [(ngModel)]="selectedInterview.name">
+        </div>
+        
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" id="position" [(ngModel)]="selectedInterview.position">
+        </div>
+        
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" [(ngModel)]="selectedInterview.type">
+            <option *ngFor="let option of typeOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" [(ngModel)]="selectedInterview.status">
+            <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="dateTime">Date and Time</label>
+          <input type="text" id="dateTime" [(ngModel)]="selectedInterview.dateTime">
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
+        <button class="save-btn" (click)="saveInterview()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
