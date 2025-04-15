@@ -1,59 +1,96 @@
 <div class="container">
-   <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
   
-    <div class="main-content">
-      <div class="headers">
-        <h2>Jobs Posted</h2>
-        <button class="search-btn">Search</button>
+  <div class="main-content">
+    <div class="headers">
+      <h2>Jobs Posted</h2>
+      <div class="search-container">
+        <input 
+          *ngIf="showSearchInput" 
+          type="text" 
+          class="search-input" 
+          placeholder="Search jobs..." 
+          [(ngModel)]="searchTerm"
+          (input)="applySearch()"
+        >
+        <button class="search-btn" (click)="toggleSearch()">
+          <i class="fas fa-search"></i>
+          <span *ngIf="!showSearchInput">Search</span>
+          <span *ngIf="showSearchInput">Close</span>
+        </button>
       </div>
-  
-      <p class="description">Manage and review jobs</p>
-  
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Job Title</th>
-              <th>Location</th>
-              <th>Salary</th>
-              <th>Date Posted</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Software Dev</td>
-              <td>On-site</td>
-              <td>50,000</td>
-              <td>25, Apr</td>
-              <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Graphic Designer</td>
-              <td>Hybrid</td>
-              <td>50,000</td>
-              <td>25, Mar</td>
-              <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Quality Assurance</td>
-              <td>Remote</td>
-              <td>50,000</td>
-              <td>25, Apr</td>
-              <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+
+    <p class="description">Manage and review jobs</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Date Posted</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of jobs">
+            <td>{{ job.title }}</td>
+            <td>{{ job.location }}</td>
+            <td>{{ job.salary }}</td>
+            <td>{{ job.datePosted }}</td>
+            <td>
+              <button class="edit-btn" (click)="openEditModal(job)">Edit</button>
+              <button class="delete-btn" (click)="deleteJob(job.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- No results message -->
+      <div class="no-results" *ngIf="jobs.length === 0">
+        <p>No jobs found. Try adjusting your search criteria.</p>
       </div>
     </div>
   </div>
   
+  <!-- Edit Modal -->
+  <div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Edit Job</h2>
+        <button class="close-btn" (click)="closeEditModal()">×</button>
+      </div>
+      
+      <div class="modal-body" *ngIf="selectedJob">
+        <div class="form-group">
+          <label for="title">Job Title</label>
+          <input type="text" id="title" [(ngModel)]="selectedJob.title">
+        </div>
+        
+        <div class="form-group">
+          <label for="location">Location</label>
+          <select id="location" [(ngModel)]="selectedJob.location">
+            <option *ngFor="let option of locationOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="salary">Salary</label>
+          <input type="text" id="salary" [(ngModel)]="selectedJob.salary">
+        </div>
+        
+        <div class="form-group">
+          <label for="date">Date Posted</label>
+          <input type="text" id="date" [(ngModel)]="selectedJob.datePosted">
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
+        <button class="save-btn" (click)="saveJob()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
