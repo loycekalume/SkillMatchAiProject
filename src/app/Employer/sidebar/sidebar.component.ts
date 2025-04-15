@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 export class SidebarComponent {
   menuItems = [
     { link: '/employer/dashboard', icon: 'fas fa-home', text: 'Dashboard', active: true },
+    { link: '/employer/profile', icon:'fas fa-user', text: 'Profile', active: false },
     { link: '/employer/jobsposted', icon: 'fas fa-briefcase', text: 'Jobs Posted', active: false },
     { link: '/employer/ai-assistant', icon: 'fas fa-brain', text: 'AI Assistant', active: false },
     { link: '/employer/interviews', icon: 'fas fa-user', text: 'Interviews', active: false },

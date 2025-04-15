@@ -6,11 +6,13 @@ import { AiassistantComponent } from './aiassistant/aiassistant.component';
 import { EmployerInterviewsComponent } from './employer-interviews/employer-interviews.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { CandidatesComponent } from './candidates/candidates.component';
+import { EmployerprofileComponent } from './employerprofile/employerprofile.component';
 
 
 export const EMPLOYER_ROUTES: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: EmployerDashboardComponent },
+  { path: 'profile', component:EmployerprofileComponent},
   { path: 'jobsposted', component:JobsPostedComponent },
   { path: 'ai-assistant', component: AiassistantComponent},
   { path: 'applications', component: ApplicationsComponent},
