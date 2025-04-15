@@ -1,62 +1,102 @@
 <div class="container">
-    <app-sidebar></app-sidebar>
-    <div class="main-content">
-      <div class="headers">
-        <h2>Job Applications</h2>
-        <button class="search-btn">Search</button>
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <div class="headers">
+      <h2>Job Applications</h2>
+      <div class="search-container">
+        <input 
+          *ngIf="showSearchInput" 
+          type="text" 
+          class="search-input" 
+          placeholder="Search applications..." 
+          [(ngModel)]="searchTerm"
+          (input)="applySearch()"
+        >
+        <button class="search-btn" (click)="toggleSearch()">
+          <i class="fas fa-search"></i>
+          <span *ngIf="!showSearchInput">Search</span>
+          <span *ngIf="showSearchInput">Close</span>
+        </button>
       </div>
-  
-      <p class="description">Manage and review job applications</p>
-  
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Years of experience</th>
-              <th>Status</th>
-              <th>Date applied</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Loyce Kalume</td>
-              <td>Software Dev</td>
-              <td>5 years</td>
-              <td class="status in-review">in-review</td>
-              <td>25, Apr</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Grace Kalume</td>
-              <td>Graphic Designer</td>
-              <td>5 years</td>
-              <td class="status interview">interview</td>
-              <td>25, March</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Anthony Tial</td>
-              <td>Quality Assurance</td>
-              <td>2 years</td>
-              <td class="status new">new</td>
-              <td>25, Apr</td>
-              <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+
+    <p class="description">Manage and review job applications</p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Years of experience</th>
+            <th>Status</th>
+            <th>Date applied</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let application of applications">
+            <td>{{ application.name }}</td>
+            <td>{{ application.position }}</td>
+            <td>{{ application.yearsOfExperience }}</td>
+            <td class="status {{ application.status }}">{{ application.status }}</td>
+            <td>{{ application.dateApplied }}</td>
+            <td>
+              <button class="edit" (click)="openEditModal(application)">Edit</button>
+              <button class="delete" (click)="deleteApplication(application.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- No results message -->
+      <div class="no-results" *ngIf="applications.length === 0">
+        <p>No applications found. Try adjusting your search criteria.</p>
       </div>
     </div>
   </div>
   
+  <!-- Edit Modal -->
+  <div class="modal-overlay" *ngIf="showEditModal" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Edit Application</h2>
+        <button class="close-btn" (click)="closeEditModal()">×</button>
+      </div>
+      
+      <div class="modal-body" *ngIf="selectedApplication">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" [(ngModel)]="selectedApplication.name">
+        </div>
+        
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" id="position" [(ngModel)]="selectedApplication.position">
+        </div>
+        
+        <div class="form-group">
+          <label for="experience">Years of Experience</label>
+          <input type="text" id="experience" [(ngModel)]="selectedApplication.yearsOfExperience">
+        </div>
+        
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" [(ngModel)]="selectedApplication.status">
+            <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="date">Date Applied</label>
+          <input type="text" id="date" [(ngModel)]="selectedApplication.dateApplied">
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
+        <button class="save-btn" (click)="saveApplication()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
