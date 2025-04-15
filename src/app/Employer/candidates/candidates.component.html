@@ -1,85 +1,136 @@
-<body>
-    <div class="dashboard-container">
-        <app-sidebar></app-sidebar>
-   
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header">
-                <div class="page-header">
-                    <h1>Top Matched Candidates</h1>
-                    <div class="header-actions">
-                        <div class="filter-dropdown">
-                            <button class="filter-btn">
-                                <i data-feather="filter"></i>
-                                Filter
-                            </button>
-                        </div>
-                        <div class="search-container">
-                            <input type="text" placeholder="Search candidates..." class="search-input">
-                            <i data-feather="search" class="search-icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </header>
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-header">
+      <div class="page-header">
+        <h1>Top Matched Candidates</h1>
+        <div class="header-actions">
+          <div class="filter-dropdown">
+            <button class="filter-btn" (click)="toggleFilterDropdown()">
+              <i data-feather="filter"></i>
+              Filter
+              <span class="filter-badge" *ngIf="hasActiveFilters"></span>
+            </button>
 
-            <!-- Candidates Grid -->
-            <section class="all-candidates-section">
-                <div class="candidates-grid">
-                    <div class="candidate-card" *ngFor="let candidate of candidates">
-                      <div class="candidate-info">
-                        <div class="candidate-header">
-                          <div class="candidate-avatar">{{ candidate.initials }}</div>
-                          <div>
-                            <h3 class="candidate-name">{{ candidate.name }}</h3>
-                            <h4 class="candidate-position">{{ candidate.position }}</h4>
-                          </div>
-                        </div>
-                        <div class="match-percentage">
-                          <div class="match-badge">{{ candidate.match }}% Match</div>
-                          <div class="match-bar">
-                            <div class="match-progress" [style.width.%]="candidate.match"></div>
-                          </div>
-                        </div>
-                        <div class="candidate-skills">
-                          <ng-container *ngFor="let skill of candidate.skills; let last = last">
-                            <span class="skill">{{ skill }}</span><span *ngIf="!last"> • </span>
-                          </ng-container>
-                        </div>
-                      </div>
-                      <div class="candidate-actions">
-                        <button class="action-btn schedule" (click)="openModal(candidate.name)">Schedule Interview</button>
-                        <button class="action-btn hire">Hire</button>
-                      </div>
-                    </div>
+            <!-- Filter Dropdown Menu -->
+            <div class="filter-menu" *ngIf="showFilterDropdown">
+              <div class="filter-header">
+                <h3>Filter Candidates</h3>
+                <button class="clear-filters" (click)="clearFilters()">Clear All</button>
+              </div>
+
+              <div class="filter-section">
+                <h4>Match Percentage</h4>
+                <div class="filter-options">
+                  <div *ngFor="let option of filterOptions.matchPercentage; let i = index" class="filter-option"
+                    [class.selected]="option.selected" (click)="toggleFilter('matchPercentage', i)">
+                    <span class="filter-checkbox">
+                      <i data-feather="check" *ngIf="option.selected"></i>
+                    </span>
+                    {{ option.label }}
                   </div>
-                  
-                <!-- Pagination -->
-                <div class="pagination">
-                    <button class="pagination-btn active">1</button>
-                    <button class="pagination-btn">2</button>
-                    <button class="pagination-btn">3</button>
-                    <span class="pagination-ellipsis">...</span>
-                    <button class="pagination-btn">10</button>
-                    <button class="pagination-btn next">
-                        <i data-feather="chevron-right"></i>
-                    </button>
                 </div>
-            </section>
-        </main>
-    </div>
-    
-    <app-interviewmodal 
-    [isVisible]="showInterviewModal" 
-    [candidateName]="selectedCandidate"
-    (close)="closeModal()" 
-    (submit)="handleInterviewScheduled($event)">
-  </app-interviewmodal>
+              </div>
 
-    <script>
-        // Initialize Feather icons
-        document.addEventListener('DOMContentLoaded', function() {
-            feather.replace();
-        });
-    </script>
-</body>
+              <div class="filter-section">
+                <h4>Position</h4>
+                <div class="filter-options">
+                  <div *ngFor="let option of filterOptions.position; let i = index" class="filter-option"
+                    [class.selected]="option.selected" (click)="toggleFilter('position', i)">
+                    <span class="filter-checkbox">
+                      <i data-feather="check" *ngIf="option.selected"></i>
+                    </span>
+                    {{ option.label }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-section">
+                <h4>Skills</h4>
+                <div class="filter-options skills-grid">
+                  <div *ngFor="let option of filterOptions.skills; let i = index" class="filter-option skill-option"
+                    [class.selected]="option.selected" (click)="toggleFilter('skills', i)">
+                    <span class="filter-checkbox">
+                      <i data-feather="check" *ngIf="option.selected"></i>
+                    </span>
+                    {{ option.label }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-actions">
+                <button class="apply-filters" (click)="toggleFilterDropdown()">Apply Filters</button>
+              </div>
+            </div>
+          </div>
+          <div class="search-container">
+            <input type="text" placeholder="Search candidates..." class="search-input" [(ngModel)]="searchText"
+              (input)="applySearch()">
+            <i data-feather="search" class="search-icon"></i>
+            <button *ngIf="searchText" class="clear-search" (click)="searchText = ''; applySearch()">
+              ×
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Candidates Grid -->
+    <section class="all-candidates-section">
+      <div class="candidates-grid">
+        <div class="candidate-card" *ngFor="let candidate of candidates">
+          <div class="candidate-info">
+            <div class="candidate-header">
+              <div class="candidate-avatar">{{ candidate.initials }}</div>
+              <div>
+                <h3 class="candidate-name">{{ candidate.name }}</h3>
+                <h4 class="candidate-position">{{ candidate.position }}</h4>
+              </div>
+            </div>
+            <div class="match-percentage">
+              <div class="match-badge">{{ candidate.match }}% Match</div>
+              <div class="match-bar">
+                <div class="match-progress" [style.width.%]="candidate.match"></div>
+              </div>
+            </div>
+            <div class="candidate-skills">
+              <ng-container *ngFor="let skill of candidate.skills; let last = last">
+                <span class="skill">{{ skill }}</span><span *ngIf="!last"> • </span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="candidate-actions">
+            <button class="action-btn schedule" (click)="openModal(candidate.name)">Schedule Interview</button>
+            <button class="action-btn hire">Hire</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No results message -->
+      <div class="no-results" *ngIf="candidates.length === 0">
+        <i data-feather="search"></i>
+        <h3>No matching candidates found</h3>
+        <p>Try adjusting your search or filters to find more candidates</p>
+        <button class="reset-btn" (click)="clearFilters(); searchText = ''; applySearch()">Reset All Filters</button>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="candidates.length > 0">
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <span class="pagination-ellipsis">...</span>
+        <button class="pagination-btn">10</button>
+        <button class="pagination-btn next">
+          <i data-feather="chevron-right"></i>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<app-interviewmodal [isVisible]="showInterviewModal" [candidateName]="selectedCandidate" (close)="closeModal()"
+  (submit)="handleInterviewScheduled($event)">
+</app-interviewmodal>
