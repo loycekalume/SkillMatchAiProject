@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,11 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
+  constructor(
+   
+    private authService: AuthService // ✅ Inject AuthService
+  ) {}
+
   menuItems = [
     { link: '/employer/dashboard', icon: 'fas fa-home', text: 'Dashboard', active: true },
     { link: '/employer/profile', icon:'fas fa-user', text: 'Profile', active: false },
@@ -20,7 +26,17 @@ export class SidebarComponent {
     { link: '/employer/applications', icon: 'fas fa-user', text: 'Applications', active: false },
     
   ];
-  
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        console.log('Logged out successfully');
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+      }
+    });
+  }
+
   closeSidebar(): void {
     document.querySelector('.sidebar')?.classList.remove('active');
   }
