@@ -1,7 +1,15 @@
-<div class="container">
+<div class="container1">
   <app-sidebar></app-sidebar>
   
   <div class="main-content">
+    <!-- Success Message -->
+    <div class="success-message" *ngIf="showSuccessMessage">
+      <div class="success-content">
+        <i class="success-icon">✓</i>
+        <span>{{ successMessage }}</span>
+      </div>
+    </div>
+
     <div class="headers">
       <h2>Jobs Posted</h2>
       <div class="search-container">
@@ -18,19 +26,42 @@
           <span *ngIf="!showSearchInput">Search</span>
           <span *ngIf="showSearchInput">Close</span>
         </button>
+        <button class="create-btn" (click)="openCreateModal()">
+          <i class="fas fa-plus"></i>
+          <span>Post New Job</span>
+        </button>
       </div>
     </div>
 
     <p class="description">Manage and review jobs</p>
 
-    <div class="table-container">
-      <table>
+    <!-- Loading Indicator -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="loading-spinner"></div>
+      <p>Loading jobs...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-container" *ngIf="errorMessage && !isLoading">
+      <div class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ errorMessage }}</span>
+      </div>
+      <button class="retry-btn" (click)="retryLoading()">Try Again</button>
+    </div>
+
+    <!-- Jobs Table -->
+    <div class="table-container" *ngIf="!isLoading && !errorMessage">
+      <table *ngIf="jobs.length > 0">
         <thead>
           <tr>
             <th>Job Title</th>
             <th>Location</th>
-            <th>Salary</th>
+            <th>Type</th>
+            <th>Arrangement</th>
+            <th>Salary Range</th>
             <th>Date Posted</th>
+            <th>Deadline</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -38,11 +69,23 @@
           <tr *ngFor="let job of jobs">
             <td>{{ job.title }}</td>
             <td>{{ job.location }}</td>
-            <td>{{ job.salary }}</td>
-            <td>{{ job.datePosted }}</td>
+            <td>{{ job.job_type }}</td>
+            <td>{{ job.work_arrangement }}</td>
+            <td>{{ formatSalary(job.salary_min, job.salary_max) }}</td>
+            <td>{{ formatDate(job.created_at) }}</td>
             <td>
-              <button class="edit-btn" (click)="openEditModal(job)">Edit</button>
-              <button class="delete-btn" (click)="deleteJob(job.id)">Delete</button>
+              <span [class.expired-deadline]="isDeadlinePast(job.application_deadline)">
+                {{ formatDate(job.application_deadline) }}
+                <small class="deadline-days">{{ getDaysUntilDeadline(job.application_deadline) }}</small>
+              </span>
+            </td>
+            <td class="actions-cell">
+              <button class="edit-btn" (click)="openEditModal(job)" title="Edit job">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="delete-btn" (click)="deleteJob(job._id || job.job_id || '')" title="Delete job">
+                <i class="fas fa-trash"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -50,7 +93,12 @@
       
       <!-- No results message -->
       <div class="no-results" *ngIf="jobs.length === 0">
-        <p>No jobs found. Try adjusting your search criteria.</p>
+        <div class="empty-state">
+          <i class="fas fa-clipboard-list empty-icon"></i>
+          <h3>No jobs found</h3>
+          <p>You haven't posted any jobs yet or no jobs match your search criteria.</p>
+          <button class="post-job-btn" (click)="openCreateModal()">Post a Job</button>
+        </div>
       </div>
     </div>
   </div>
@@ -70,26 +118,160 @@
         </div>
         
         <div class="form-group">
-          <label for="location">Location</label>
-          <select id="location" [(ngModel)]="selectedJob.location">
-            <option *ngFor="let option of locationOptions" [value]="option">{{ option }}</option>
-          </select>
+          <label for="description">Job Description</label>
+          <textarea id="description" [(ngModel)]="selectedJob.description" rows="5"></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="location">Location</label>
+            <input type="text" id="location" [(ngModel)]="selectedJob.location">
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="job_type">Job Type</label>
+            <select id="job_type" [(ngModel)]="selectedJob.job_type">
+              <option *ngFor="let option of jobTypeOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="work_arrangement">Work Arrangement</label>
+            <select id="work_arrangement" [(ngModel)]="selectedJob.work_arrangement">
+              <option *ngFor="let option of workArrangementOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="experience_level">Experience Level</label>
+            <select id="experience_level" [(ngModel)]="selectedJob.experience_level">
+              <option *ngFor="let option of experienceLevelOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="education_required">Education Required</label>
+            <select id="education_required" [(ngModel)]="selectedJob.education_required">
+              <option *ngFor="let option of educationRequiredOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="salary_min">Minimum Salary</label>
+            <input type="number" id="salary_min" [(ngModel)]="selectedJob.salary_min">
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="salary_max">Maximum Salary</label>
+            <input type="number" id="salary_max" [(ngModel)]="selectedJob.salary_max">
+          </div>
         </div>
         
         <div class="form-group">
-          <label for="salary">Salary</label>
-          <input type="text" id="salary" [(ngModel)]="selectedJob.salary">
-        </div>
-        
-        <div class="form-group">
-          <label for="date">Date Posted</label>
-          <input type="text" id="date" [(ngModel)]="selectedJob.datePosted">
+          <label for="application_deadline">Application Deadline</label>
+          <input type="date" id="application_deadline" [ngModel]="selectedJob.application_deadline | date:'yyyy-MM-dd'" 
+            (ngModelChange)="selectedJob.application_deadline = $event">
         </div>
       </div>
       
       <div class="modal-footer">
         <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
-        <button class="save-btn" (click)="saveJob()">Save Changes</button>
+        <button class="save-btn" [disabled]="isSubmitting" (click)="saveJob()">
+          <span *ngIf="isSubmitting" class="spinner-small"></span>
+          <span *ngIf="!isSubmitting">Save Changes</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Create Modal -->
+  <div class="modal-overlay" *ngIf="showCreateModal" (click)="closeCreateModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Post New Job</h2>
+        <button class="close-btn" (click)="closeCreateModal()">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="new-title">Job Title</label>
+          <input type="text" id="new-title" [(ngModel)]="newJob.title">
+        </div>
+        
+        <div class="form-group">
+          <label for="new-description">Job Description</label>
+          <textarea id="new-description" [(ngModel)]="newJob.description" rows="5"></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="new-location">Location</label>
+            <input type="text" id="new-location" [(ngModel)]="newJob.location">
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="new-job_type">Job Type</label>
+            <select id="new-job_type" [(ngModel)]="newJob.job_type">
+              <option *ngFor="let option of jobTypeOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="new-work_arrangement">Work Arrangement</label>
+            <select id="new-work_arrangement" [(ngModel)]="newJob.work_arrangement">
+              <option *ngFor="let option of workArrangementOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="new-experience_level">Experience Level</label>
+            <select id="new-experience_level" [(ngModel)]="newJob.experience_level">
+              <option *ngFor="let option of experienceLevelOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="new-education_required">Education Required</label>
+            <select id="new-education_required" [(ngModel)]="newJob.education_required">
+              <option *ngFor="let option of educationRequiredOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="new-salary_min">Minimum Salary</label>
+            <input type="number" id="new-salary_min" [(ngModel)]="newJob.salary_min">
+          </div>
+          
+          <div class="form-group half-width">
+            <label for="new-salary_max">Maximum Salary</label>
+            <input type="number" id="new-salary_max" [(ngModel)]="newJob.salary_max">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="new-application_deadline">Application Deadline</label>
+          <input type="date" id="new-application_deadline" [(ngModel)]="newJob.application_deadline">
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeCreateModal()">Cancel</button>
+        <button class="save-btn" [disabled]="isSubmitting || !validateJobData(newJob)" (click)="createJob()">
+          <span *ngIf="isSubmitting" class="spinner-small"></span>
+          <span *ngIf="!isSubmitting">Create Job</span>
+        </button>
       </div>
     </div>
   </div>

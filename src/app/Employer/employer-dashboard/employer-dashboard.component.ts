@@ -4,49 +4,43 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InterviewmodalComponent } from '../interviewmodal/interviewmodal.component';
-interface Candidate {
-  id: number;
-  name: string;
-  position: string;
-  initials: string;
-}
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-employer-dashboard',
   standalone: true,
-  imports: [SidebarComponent,RouterModule,CommonModule,ReactiveFormsModule,InterviewmodalComponent],
+  imports: [SidebarComponent, RouterModule, CommonModule, ReactiveFormsModule, InterviewmodalComponent],
   templateUrl: './employer-dashboard.component.html',
   styleUrl: './employer-dashboard.component.css'
 })
-
 export class EmployerDashboardComponent {
   isJobModalOpen = false;
+  showInterviewModal = false;
+  selectedCandidate = '';
   jobForm: FormGroup;
-  
-  
-  
-  
+  showSuccessMessage = false;
+  successMessage = '';
 
-  constructor(private fb: FormBuilder) {
-    // Set minimum date to today
-    
-    // Initialize job form
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.jobForm = this.fb.group({
-      jobTitle: ['', Validators.required],
-      jobDescription: ['', Validators.required],
-      jobSkills: ['', Validators.required],
-      salary: ['', Validators.required]
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      location: ['', Validators.required],
+      job_type: ['', Validators.required], 
+      work_arrangement: ['', Validators.required],
+      experience_level: ['', Validators.required],
+      education_required: [''],
+      salary_min: ['', Validators.required],
+      salary_max: ['', Validators.required],
+      application_deadline: ['', Validators.required]
     });
-    
-    
   }
 
   ngOnInit(): void {
-    // Initialize Feather icons if needed
-    
+    // Initialize icons or other UI components if needed
   }
-  
-  // Job Modal methods
+
+  // Modal methods
   openJobModal(): void {
     this.isJobModalOpen = true;
     document.body.style.overflow = 'hidden';
@@ -57,30 +51,65 @@ export class EmployerDashboardComponent {
     document.body.style.overflow = '';
   }
 
-  submitJobForm(): void {
+  openModal(name: string): void {
+    this.selectedCandidate = name;
+    this.showInterviewModal = true;
+  }
+
+  closeModal(): void {
+    this.showInterviewModal = false;
+  }
+
+  handleInterviewScheduled(data: any): void {
+    console.log('Interview scheduled:', data);
+  }
+
+  displaySuccessMessage(message: string): void {
+    this.successMessage = message;
+    this.showSuccessMessage = true;
+    
+    // Auto hide the success message after 3 seconds
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 3000);
+  }
+
+  onSubmit(): void {
     if (this.jobForm.valid) {
-      console.log('Job form submitted:', this.jobForm.value);
-      this.closeJobModal();
-      this.jobForm.reset();
+      const jobData = this.jobForm.value;
+      console.log('Submitting job:', jobData);
+  
+      const token = localStorage.getItem('token');
+      console.log('Fetched token from localStorage:', token);
+  
+      if (!token) {
+        console.error('No token found. Please log in.');
+        return;
+      }
+  
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+  
+      this.http.post('http://localhost:5000/api/v1/jobs', jobData, { headers }).subscribe({
+        next: (res) => {
+          console.log('Job created successfully:', res);
+          // Close modal immediately
+          this.closeJobModal();
+          // Reset form
+          this.jobForm.reset();
+          // Show success message on main page after modal is closed
+          this.displaySuccessMessage('Job posted successfully!');
+        },
+        error: (err) => {
+          console.error('Error creating job:', err);
+        }
+      });
     } else {
+      // Mark all fields as touched to trigger validation visuals
       Object.keys(this.jobForm.controls).forEach(key => {
         this.jobForm.get(key)?.markAsTouched();
       });
     }
   }
-  showInterviewModal = false;
-selectedCandidate = '';
-
-openModal(name: string): void {
-  this.selectedCandidate = name;
-  this.showInterviewModal = true;
-}
-
-handleInterviewScheduled(data: any): void {
-  console.log('Interview scheduled:', data);
-}
-closeModal() {
-  this.showInterviewModal = false;
-}
-
 }

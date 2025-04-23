@@ -205,49 +205,118 @@
             </section>
         </main>
     </div>
-    <!-- Job Post Modal -->
-<div class="modal-overlay" [ngClass]="{'active': isJobModalOpen}" (click)="closeJobModal()">
+    
+<!-- Job Post Modal -->
+<div class="global-success-message" *ngIf="showSuccessMessage">
+    <div class="success-content">
+      <i class="success-icon">✓</i>
+      <span>{{ successMessage }}</span>
+    </div>
+  </div>
+  
+  <!-- Job Post Modal -->
+  <div class="modal-overlay" [ngClass]="{'active': isJobModalOpen}" (click)="closeJobModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h2>Post a job</h2>
         <button class="close-button" (click)="closeJobModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="jobForm" (ngSubmit)="submitJobForm()">
+        <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="jobTitle">Job Title</label>
-            <input type="text" id="jobTitle" formControlName="jobTitle" class="form-control">
-            <div *ngIf="jobForm.get('jobTitle')?.invalid && jobForm.get('jobTitle')?.touched" class="error-message">
+            <label for="title">Job Title</label>
+            <input type="text" id="title" formControlName="title" required />
+            <div class="error-message" *ngIf="jobForm.get('title')?.invalid && jobForm.get('title')?.touched">
               Job title is required
             </div>
           </div>
-          
+      
           <div class="form-group">
-            <label for="jobDescription">Job description</label>
-            <textarea id="jobDescription" formControlName="jobDescription" class="form-control" rows="4"></textarea>
-            <div *ngIf="jobForm.get('jobDescription')?.invalid && jobForm.get('jobDescription')?.touched" class="error-message">
+            <label for="description">Job Description</label>
+            <textarea id="description" formControlName="description" required></textarea>
+            <div class="error-message" *ngIf="jobForm.get('description')?.invalid && jobForm.get('description')?.touched">
               Job description is required
             </div>
           </div>
-          
+      
           <div class="form-group">
-            <label for="jobSkills">Job Skills and requirements</label>
-            <input type="text" id="jobSkills" formControlName="jobSkills" class="form-control">
-            <div *ngIf="jobForm.get('jobSkills')?.invalid && jobForm.get('jobSkills')?.touched" class="error-message">
-              Job skills are required
+            <label for="location">Location</label>
+            <input type="text" id="location" formControlName="location" required />
+            <div class="error-message" *ngIf="jobForm.get('location')?.invalid && jobForm.get('location')?.touched">
+              Location is required
             </div>
           </div>
-          
+      
           <div class="form-group">
-            <label for="salary">Salary</label>
-            <input type="text" id="salary" formControlName="salary" class="form-control">
-            <div *ngIf="jobForm.get('salary')?.invalid && jobForm.get('salary')?.touched" class="error-message">
-              Salary is required
+            <label for="job_type">Job Type</label>
+            <select id="job_type" formControlName="job_type" required>
+              <option value="">Select job type</option>
+              <option value="full-time">Full-Time</option>
+              <option value="part-time">Part-Time</option>
+              <option value="contract">Contract</option>
+              <option value="internship">Internship</option>
+              <option value="freelance">Freelance</option>
+            </select>
+            <div class="error-message" *ngIf="jobForm.get('job_type')?.invalid && jobForm.get('job_type')?.touched">
+              Job type is required
             </div>
           </div>
-          
+      
+          <div class="form-group">
+            <label for="work_arrangement">Work Arrangement</label>
+            <select id="work_arrangement" formControlName="work_arrangement" required>
+              <option value="">Select work arrangement</option>
+              <option value="remote">Remote</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="on-site">On-Site</option>
+            </select>
+            <div class="error-message" *ngIf="jobForm.get('work_arrangement')?.invalid && jobForm.get('work_arrangement')?.touched">
+              Work arrangement is required
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="experience_level">Experience Level</label>
+            <input type="text" id="experience_level" formControlName="experience_level" required />
+            <div class="error-message" *ngIf="jobForm.get('experience_level')?.invalid && jobForm.get('experience_level')?.touched">
+              Experience level is required
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="education_required">Education Required</label>
+            <input type="text" id="education_required" formControlName="education_required" />
+          </div>
+      
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="salary_min">Minimum Salary</label>
+              <input type="number" id="salary_min" formControlName="salary_min" required />
+              <div class="error-message" *ngIf="jobForm.get('salary_min')?.invalid && jobForm.get('salary_min')?.touched">
+                Minimum salary is required
+              </div>
+            </div>
+      
+            <div class="form-group half-width">
+              <label for="salary_max">Maximum Salary</label>
+              <input type="number" id="salary_max" formControlName="salary_max" required />
+              <div class="error-message" *ngIf="jobForm.get('salary_max')?.invalid && jobForm.get('salary_max')?.touched">
+                Maximum salary is required
+              </div>
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="application_deadline">Application Deadline</label>
+            <input type="date" id="application_deadline" formControlName="application_deadline" required />
+            <div class="error-message" *ngIf="jobForm.get('application_deadline')?.invalid && jobForm.get('application_deadline')?.touched">
+              Application deadline is required
+            </div>
+          </div>
+      
           <div class="form-actions">
-            <button type="submit" class="post-button" [disabled]="jobForm.invalid">Post</button>
+            <button type="button" class="cancel-button" (click)="closeJobModal()">Cancel</button>
+            <button type="submit" class="post-button" [disabled]="jobForm.invalid">Post Job</button>
           </div>
         </form>
       </div>

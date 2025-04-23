@@ -20,7 +20,7 @@ interface LoginPayload {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/v1/auth'; // Update if needed
+  private apiUrl = 'http://localhost:5000/api/v1/auth'; // Update if needed
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -39,10 +39,14 @@ export class AuthService {
   login(credentials: LoginPayload): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
       tap((res: any) => {
+        console.log('Login response:', res);
+        localStorage.setItem('token', res.token.accessToken); // ✅ save only the access token string
         localStorage.setItem('user', JSON.stringify(res.user));
       })
+      
     );
   }
+  
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
