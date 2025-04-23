@@ -40,7 +40,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
       tap((res: any) => {
         console.log('Login response:', res);
-        localStorage.setItem('token', res.token.accessToken); // ✅ save only the access token string
+        localStorage.setItem('token', res.token.accessToken); 
         localStorage.setItem('user', JSON.stringify(res.user));
       })
       

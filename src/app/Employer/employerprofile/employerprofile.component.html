@@ -1,135 +1,155 @@
 <div class="containers">
-    <app-sidebar></app-sidebar>
-    
-    <div class="main-contents">
-      <div class="profile-header">
-        <h1>Company Profile</h1>
-        <button 
-          *ngIf="!isEditMode" 
-          class="edit-btn" 
-          (click)="toggleEditMode()"
-        >
-          <i data-feather="edit"></i> Edit Profile
-        </button>
-        <div *ngIf="isEditMode" class="action-buttons">
-          <button class="cancel-btn" (click)="toggleEditMode()">Cancel</button>
-          <button class="save-btn" (click)="saveProfile()">Save Changes</button>
-        </div>
+  <app-sidebar></app-sidebar>
+  
+  <div class="main-contents">
+    <div class="profile-header">
+      <h1>Company Profile</h1>
+      
+      <div *ngIf="isLoading" class="loading-indicator">
+        Loading...
       </div>
       
-      <div class="profile-content">
-        <!-- View Mode -->
-        <div *ngIf="!isEditMode" class="profile-view">
-          <div class="profile-section company-info">
-            <div class="logo-container">
-              <img 
-                [src]="profile.logo_url || '/assets/images/default-logo.png'" 
-                alt="{{ profile.company_name }} logo" 
-                class="company-logo"
-              >
-            </div>
-            
-            <div class="company-details">
-              <h2>{{ profile.company_name }}</h2>
-              <div class="detail-row">
-                <span class="label">Company Size:</span>
-                <span class="value">{{ profile.company_size }}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Industry:</span>
-                <span class="value">{{ profile.industry }}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Location:</span>
-                <span class="value">{{ profile.location }}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Website:</span>
-                <a [href]="profile.website_url" target="_blank" class="website-link">{{ profile.website_url }}</a>
-              </div>
-            </div>
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+      
+      <button 
+        *ngIf="!isEditMode && !isLoading" 
+        class="edit-btn" 
+        (click)="toggleEditMode()"
+      >
+        <i data-feather="edit"></i> Edit Profile
+      </button>
+      
+      <div *ngIf="isEditMode && !isLoading" class="action-buttons">
+        <button class="cancel-btn" (click)="toggleEditMode()">Cancel</button>
+        <button class="save-btn" (click)="saveProfile()">Save Changes</button>
+      </div>
+    </div>
+    
+    <div class="profile-content" *ngIf="!isLoading">
+      <!-- View Mode -->
+      <div *ngIf="!isEditMode" class="profile-view">
+        <div class="profile-section company-info">
+          <div class="logo-container">
+            <img 
+              [src]="profile.logo_url || '/assets/images/default-logo.png'" 
+              alt="{{ profile.company_name }} logo" 
+              class="company-logo"
+            >
           </div>
           
-          <div class="profile-section">
-            <h3>Company Description</h3>
-            <p class="company-description">{{ profile.company_description }}</p>
+          <div class="company-details">
+            <h2>{{ profile.company_name }}</h2>
+            <div class="detail-row">
+              <span class="label">Company Size:</span>
+              <span class="value">{{ profile.company_size }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Industry:</span>
+              <span class="value">{{ profile.industry }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Location:</span>
+              <span class="value">{{ profile.location }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Website:</span>
+              <a [href]="profile.website_url" target="_blank" class="website-link">{{ profile.website_url }}</a>
+            </div>
           </div>
         </div>
         
-        <!-- Edit Mode -->
-        <div *ngIf="isEditMode" class="profile-edit">
-          <div class="profile-section company-info">
-            <div class="logo-container">
-              <img 
-                [src]="editableProfile.logo_url || '/assets/images/default-logo.png'" 
-                alt="Company logo" 
-                class="company-logo"
+        <div class="profile-section">
+          <h3>Company Description</h3>
+          <p class="company-description">{{ profile.company_description }}</p>
+        </div>
+      </div>
+      
+      <!-- Edit Mode -->
+      <div *ngIf="isEditMode" class="profile-edit">
+        <div class="profile-section company-info">
+          <div class="logo-container">
+            <img 
+              [src]="editableProfile.logo_url || '/assets/images/default-logo.png'" 
+              alt="Company logo" 
+              class="company-logo"
+            >
+            <div class="logo-upload">
+              <label for="logo-input" class="upload-btn">
+                <i data-feather="upload"></i> Upload Logo
+              </label>
+              <input 
+                type="file" 
+                id="logo-input" 
+                accept="image/*" 
+                (change)="onLogoChange($event)"
+                class="file-input"
               >
-              <div class="logo-upload">
-                <label for="logo-input" class="upload-btn">
-                  <i data-feather="upload"></i> Upload Logo
-                </label>
-                <input 
-                  type="file" 
-                  id="logo-input" 
-                  accept="image/*" 
-                  (change)="onLogoChange($event)"
-                  class="file-input"
-                >
-              </div>
-            </div>
-            
-            <div class="company-details">
-              <div class="form-group">
-                <label for="company-name">Company Name</label>
-                <input 
-                  type="text" 
-                  id="company-name" 
-                  [(ngModel)]="editableProfile.company_name" 
-                  required
-                >
-              </div>
-              
-              <div class="form-group">
-                <label for="company-size">Company Size</label>
-                <select id="company-size" [(ngModel)]="editableProfile.company_size">
-                  <option value="">Select company size</option>
-                  <option *ngFor="let size of companySizes" [value]="size">{{ size }}</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="industry">Industry</label>
-                <select id="industry" [(ngModel)]="editableProfile.industry">
-                  <option value="">Select industry</option>
-                  <option *ngFor="let industry of industries" [value]="industry">{{ industry }}</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="website">Website URL</label>
-                <input 
-                  type="url" 
-                  id="website" 
-                  [(ngModel)]="editableProfile.website_url" 
-                  placeholder="https://example.com"
-                >
-              </div>
             </div>
           </div>
           
-          <div class="profile-section">
+          <div class="company-details">
             <div class="form-group">
-              <label for="description">Company Description</label>
-              <textarea 
-                id="description" 
-                [(ngModel)]="editableProfile.company_description" 
-                rows="6"
-                placeholder="Describe your company, mission, values, and what you're looking for in candidates..."
-              ></textarea>
+              <label for="company-name">Company Name</label>
+              <input 
+                type="text" 
+                id="company-name" 
+                [(ngModel)]="editableProfile.company_name" 
+                required
+              >
             </div>
+            
+            <div class="form-group">
+              <label for="company-size">Company Size</label>
+              <select id="company-size" [(ngModel)]="editableProfile.company_size">
+                <option value="">Select company size</option>
+                <option *ngFor="let size of companySizes" [value]="size">{{ size }}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="industry">Industry</label>
+              <select id="industry" [(ngModel)]="editableProfile.industry">
+                <option value="">Select industry</option>
+                <option *ngFor="let industry of industries" [value]="industry">{{ industry }}</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input 
+                type="text" 
+                id="location" 
+                [(ngModel)]="editableProfile.location" 
+                placeholder="City, Country"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="website">Website URL</label>
+              <input 
+                type="url" 
+                id="website" 
+                [(ngModel)]="editableProfile.website_url" 
+                placeholder="https://example.com"
+              >
+            </div>
+          </div>
+        </div>
+        
+        <div class="profile-section">
+          <div class="form-group">
+            <label for="description">Company Description</label>
+            <textarea 
+              id="description" 
+              [(ngModel)]="editableProfile.company_description" 
+              rows="6"
+              placeholder="Describe your company, mission, values, and what you're looking for in candidates..."
+            ></textarea>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
