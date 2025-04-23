@@ -3,7 +3,15 @@
 
     <!-- Main Content -->
     <main class="main-contents">
-        <div class="profile-header">
+        <div *ngIf="isLoading" class="loading-spinner">
+            Loading...
+        </div>
+        
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
+
+        <div *ngIf="!isLoading" class="profile-header">
             <div class="profile-title">
                 <span class="profile-label">Profile Details</span>
                 <h1 class="welcome-text">Welcome {{ profileData.firstName }}!</h1>
@@ -16,7 +24,7 @@
             </div>
         </div>
 
-        <div class="profile-photo-container">
+        <div *ngIf="!isLoading" class="profile-photo-container">
             <div class="profile-photo">
                 <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=80&width=80" alt="Profile Photo">
                 <div *ngIf="isEditing" class="photo-edit-overlay">
@@ -25,7 +33,7 @@
             </div>
         </div>
 
-        <div class="profile-form">
+        <div *ngIf="!isLoading" class="profile-form">
             <h2 class="section-title">Personal Details</h2>
             
             <div class="form-row">
