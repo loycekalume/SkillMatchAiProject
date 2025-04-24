@@ -22,7 +22,19 @@
 
     <p class="description">Manage and review job applications</p>
 
-    <div class="table-container">
+    <!-- Loading indicator -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading applications...</p>
+    </div>
+
+    <!-- Error message -->
+    <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button (click)="fetchApplications()">Try Again</button>
+    </div>
+
+    <div class="table-container" *ngIf="!loading && !error">
       <table>
         <thead>
           <tr>
@@ -95,7 +107,10 @@
       
       <div class="modal-footer">
         <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
-        <button class="save-btn" (click)="saveApplication()">Save Changes</button>
+        <button class="save-btn" (click)="saveApplication()" [disabled]="loading">
+          <span *ngIf="!loading">Save Changes</span>
+          <span *ngIf="loading">Saving...</span>
+        </button>
       </div>
     </div>
   </div>

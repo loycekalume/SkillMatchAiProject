@@ -43,7 +43,12 @@ export class EmployerProfileService {
 
 
   }
-
+// Add this method to EmployerProfileService
+getUserProfile(): Observable<EmployerProfile> {
+  return this.http.get<EmployerProfile>(`${this.apiUrl}/currentUser`, {
+    headers: this.getAuthHeaders()
+  });
+}
   updateProfile(id: string, profile: EmployerProfile): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, profile, {
       headers: this.getAuthHeaders()

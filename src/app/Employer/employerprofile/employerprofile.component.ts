@@ -36,7 +36,6 @@ export class EmployerprofileComponent implements OnInit {
   industries = ['Information Technology', 'Healthcare', 'Finance', 'Education', 'Manufacturing', 'Retail', 'Marketing', 'Consulting', 'Entertainment', 'Transportation', 'Construction', 'Agriculture', 'Energy', 'Telecommunications', 'Hospitality'];
 
   constructor(private profileService: EmployerProfileService) {}
-
   ngOnInit(): void {
     const userStr = localStorage.getItem('user');
     if (userStr) {
@@ -44,36 +43,28 @@ export class EmployerprofileComponent implements OnInit {
       this.profile.user_id = user.id;
       this.editableProfile.user_id = user.id;
     }
-
-    const storedProfileId = localStorage.getItem('employer_profile_id');
-    if (storedProfileId) {
-      this.profileId = storedProfileId;
-      this.loadProfileData();
-    } else {
-      this.isLoading = false;
-      this.isEditMode = true;
-    }
+  
+    // Just load profile data directly - it will fetch the current user's profile
+    this.loadProfileData();
   }
 
   loadProfileData(): void {
-    if (!this.profileId) {
-      this.isLoading = false;
-      this.isEditMode = true;
-      return;
-    }
-
     this.isLoading = true;
     this.error = '';
-
-    this.profileService.getProfileById(this.profileId).subscribe({
+  
+    // Use getUserProfile() instead of getProfileById()
+    this.profileService.getUserProfile().subscribe({
       next: (data) => {
         this.profile = data;
+        this.profileId = data.profile_id;
         this.editableProfile = { ...this.profile };
         this.isLoading = false;
+        localStorage.setItem('employer_profile_id', data.profile_id.toString());
       },
       error: (err) => {
         console.error('Error loading profile:', err);
         if (err.status === 404) {
+          // Profile doesn't exist yet
           this.error = '';
           this.isEditMode = true;
         } else {
@@ -83,23 +74,23 @@ export class EmployerprofileComponent implements OnInit {
       }
     });
   }
-
   toggleEditMode(): void {
     this.editableProfile = { ...this.profile };
     this.logoFile = null;
     this.isEditMode = !this.isEditMode;
   }
-
   saveProfile(): void {
     this.isLoading = true;
-
+    this.error = '';
+  
     const userStr = localStorage.getItem('user');
     if (userStr && !this.editableProfile.user_id) {
       const user = JSON.parse(userStr);
       this.editableProfile.user_id = user.id;
     }
-
+  
     if (this.profileId) {
+      // Update existing profile
       this.profileService.updateProfile(this.profileId, this.editableProfile).subscribe({
         next: (response) => {
           this.profile = response.profile;
@@ -115,6 +106,7 @@ export class EmployerprofileComponent implements OnInit {
         }
       });
     } else {
+      // Create new profile
       this.profileService.createProfile(this.editableProfile).subscribe({
         next: (response) => {
           this.profile = response.profile;
@@ -125,8 +117,29 @@ export class EmployerprofileComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error creating profile:', err);
-          this.error = 'Failed to create profile. Please try again.';
-          this.isLoading = false;
+          
+          // Check if error is about duplicate key
+          if (err.error && err.error.includes && err.error.includes('duplicate key value')) {
+            // User already has a profile, so let's fetch it instead
+            this.profileService.getUserProfile().subscribe({
+              next: (profile) => {
+                this.profile = profile;
+                this.profileId = profile.profile_id;
+                localStorage.setItem('employer_profile_id', profile.profile_id.toString());
+                this.isEditMode = false;
+                this.isLoading = false;
+                this.error = 'You already have a profile. It has been loaded.';
+              },
+              error: (profileErr) => {
+                console.error('Error fetching existing profile:', profileErr);
+                this.error = 'You already have a profile, but we could not load it. Please refresh the page.';
+                this.isLoading = false;
+              }
+            });
+          } else {
+            this.error = 'Failed to create profile. Please try again.';
+            this.isLoading = false;
+          }
         }
       });
     }

@@ -1,68 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-interface Application {
-  id: number;
-  name: string;
-  position: string;
-  yearsOfExperience: string;
-  status: 'new' | 'in-review' | 'interview' | 'rejected' | 'accepted';
-  dateApplied: string;
-}
+import { HttpClientModule } from '@angular/common/http';
+import { ApplicationService, Application } from '../../services/application.service';
+
 @Component({
   selector: 'app-applications',
   standalone: true,
-  imports: [SidebarComponent,FormsModule,CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    SidebarComponent
+  ],
+  providers: [ApplicationService],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.css'
 })
-export class ApplicationsComponent {
+export class ApplicationsComponent implements OnInit {
   showSearchInput = false;
-  
-
   searchTerm = '';
-  
-
   showEditModal = false;
-  
-  
   selectedApplication: Application | null = null;
-  
-  
   statusOptions = ['new', 'in-review', 'interview', 'rejected', 'accepted'];
-  
+  originalApplications: Application[] = [];
+  applications: Application[] = [];
+  loading = false;
+  error = '';
 
-  originalApplications: Application[] = [
-    {
-      id: 1,
-      name: 'Loyce Kalume',
-      position: 'Software Dev',
-      yearsOfExperience: '5 years',
-      status: 'in-review',
-      dateApplied: '25, Apr'
-    },
-    {
-      id: 2,
-      name: 'Grace Kalume',
-      position: 'Graphic Designer',
-      yearsOfExperience: '5 years',
-      status: 'interview',
-      dateApplied: '25, March'
-    },
-    {
-      id: 3,
-      name: 'Anthony Tial',
-      position: 'Quality Assurance',
-      yearsOfExperience: '2 years',
-      status: 'new',
-      dateApplied: '25, Apr'
-    }
-  ];
-  
+  constructor(private applicationService: ApplicationService) {}
 
-  applications: Application[] = [...this.originalApplications];
-  
+  ngOnInit(): void {
+    this.fetchApplications();
+  }
+
+  fetchApplications(): void {
+    this.loading = true;
+    this.error = '';
+    
+    this.applicationService.getApplications().subscribe({
+      next: (data) => {
+        // Map the backend data to our frontend format
+        this.originalApplications = data.map(item => this.applicationService.mapToFrontendFormat(item));
+        this.applications = [...this.originalApplications];
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching applications:', err);
+        this.error = 'Failed to load applications. Please try again later.';
+        this.loading = false;
+        
+        // Fallback to mock data in case of error
+        this.loadMockData();
+      }
+    });
+  }
+
+  loadMockData(): void {
+    this.originalApplications = [
+      {
+        id: 1,
+        name: 'Loyce Kalume',
+        position: 'Software Dev',
+        yearsOfExperience: '5 years',
+        status: 'in-review',
+        dateApplied: '25, Apr'
+      },
+      {
+        id: 2,
+        name: 'Grace Kalume',
+        position: 'Graphic Designer',
+        yearsOfExperience: '5 years',
+        status: 'interview',
+        dateApplied: '25, March'
+      },
+      {
+        id: 3,
+        name: 'Anthony Tial',
+        position: 'Quality Assurance',
+        yearsOfExperience: '2 years',
+        status: 'new',
+        dateApplied: '25, Apr'
+      }
+    ];
+    this.applications = [...this.originalApplications];
+  }
 
   toggleSearch(): void {
     this.showSearchInput = !this.showSearchInput;
@@ -72,10 +95,8 @@ export class ApplicationsComponent {
     }
   }
   
- 
   applySearch(): void {
     if (!this.searchTerm.trim()) {
-     
       this.applications = [...this.originalApplications];
       return;
     }
@@ -90,46 +111,60 @@ export class ApplicationsComponent {
     );
   }
   
-
   deleteApplication(id: number): void {
     if (confirm('Are you sure you want to delete this application?')) {
-     
-      this.originalApplications = this.originalApplications.filter(app => app.id !== id);
+      this.loading = true;
       
-      
-      this.applySearch();
+      this.applicationService.deleteApplication(id).subscribe({
+        next: () => {
+          this.originalApplications = this.originalApplications.filter(app => app.id !== id);
+          this.applySearch();
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error deleting application:', err);
+          alert('Failed to delete application. Please try again.');
+          this.loading = false;
+        }
+      });
     }
   }
 
   openEditModal(application: Application): void {
-   
     this.selectedApplication = { ...application };
     this.showEditModal = true;
   }
   
-  // Close edit modal
   closeEditModal(): void {
     this.showEditModal = false;
     this.selectedApplication = null;
   }
   
- 
   saveApplication(): void {
     if (this.selectedApplication) {
-     
-      const index = this.originalApplications.findIndex(app => app.id === this.selectedApplication!.id);
+      this.loading = true;
       
-      if (index !== -1) {
-       
-        this.originalApplications[index] = { ...this.selectedApplication };
-        
-       
-        this.applySearch();
-      }
+      const backendData = this.applicationService.mapToBackendFormat(this.selectedApplication);
       
-      
-      this.closeEditModal();
+      this.applicationService.updateApplication(this.selectedApplication.id, backendData).subscribe({
+        next: (response) => {
+          const updatedApplication = this.applicationService.mapToFrontendFormat(response.application);
+          
+          const index = this.originalApplications.findIndex(app => app.id === updatedApplication.id);
+          if (index !== -1) {
+            this.originalApplications[index] = updatedApplication;
+            this.applySearch();
+          }
+          
+          this.closeEditModal();
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error updating application:', err);
+          alert('Failed to update application. Please try again.');
+          this.loading = false;
+        }
+      });
     }
   }
-
 }
